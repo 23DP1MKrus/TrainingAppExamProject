@@ -3,12 +3,14 @@ package com.example.traininapp;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.type.descriptor.jdbc.VarbinaryJdbcType;
 
 @Entity
 @Table(name = "exercices")
 @Getter
 @Setter
+@ToString
 public class Exercices {
     @Id
     @SequenceGenerator(
