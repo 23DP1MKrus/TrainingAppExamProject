@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "plans")
 @Getter
@@ -25,6 +27,8 @@ public class Plans {
     private String name;
     private String difficulty;
     private Integer daysCount;
+    @OneToMany(mappedBy = "plan")
+    private List<DoneExercise> doneExercises;
 
     public Plans(Long id, String name, String difficulty, Integer daysCount) {
         this.id = id;

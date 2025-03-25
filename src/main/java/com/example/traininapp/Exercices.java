@@ -6,6 +6,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.type.descriptor.jdbc.VarbinaryJdbcType;
 
+import java.util.List;
+
 @Entity
 @Table(name = "exercices")
 @Getter
@@ -26,6 +28,8 @@ public class Exercices {
     private String name;
     private String description;
     private VarbinaryJdbcType image;
+    @OneToMany(mappedBy = "exercise")
+    private List<DoneExercise> doneExercises;
 
     public Exercices(Long id, String name, String description, VarbinaryJdbcType image) {
         this.id = id;

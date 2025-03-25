@@ -7,6 +7,7 @@ import lombok.ToString;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Entity
@@ -29,11 +30,14 @@ public class Workout {
 //    future foreign key
 //    @ManyToOne @JoinColumn(name = "workout_owner", referencedColumnName = "id")
 //    private User workoutOwner;
+
     private String name;
     private Time timeSpent;
     private LocalDate date;
     private Integer avgHeartRate;
     private float burntKcal;
+    @OneToMany(mappedBy = "workout")
+    private List<DoneExercise> doneExercises;
 
     public Workout(Long id, String name, Time timeSpent, LocalDate date, Integer avgHeartRate, float burntKcal) {
         this.id = id;

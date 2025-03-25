@@ -23,6 +23,15 @@ public class DoneExercise {
     )
     private Long id;
     // TODO: Create foreign keys
+    @ManyToOne
+    @JoinColumn(name = "exercise_id")
+    private Exercices exercise;
+    @ManyToOne
+    @JoinColumn(name = "workout_id")
+    private Workout workout;
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plans plan;
     private int reps;
     private int sets;
 
