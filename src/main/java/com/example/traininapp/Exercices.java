@@ -31,17 +31,19 @@ public class Exercices {
     @OneToMany(mappedBy = "exercise")
     private List<DoneExercise> doneExercises;
 
-    public Exercices(Long id, String name, String description, VarbinaryJdbcType image) {
+    public Exercices(Long id, String name, String description, VarbinaryJdbcType image, List<DoneExercise> doneExercises) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.image = image;
+        this.doneExercises = doneExercises;
     }
 
-    public Exercices(String name, String description, VarbinaryJdbcType image) {
-        this.name = name;
-        this.description = description;
+    public Exercices(List<DoneExercise> doneExercises, VarbinaryJdbcType image, String description, String name) {
+        this.doneExercises = doneExercises;
         this.image = image;
+        this.description = description;
+        this.name = name;
     }
 
     public Exercices() {

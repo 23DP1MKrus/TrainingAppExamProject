@@ -33,10 +33,10 @@ public class Challenge {
         this.completed = completed;
     }
 
-    public Challenge(String title, String content, Boolean completed) {
-        this.title = title;
-        this.content = content;
+    public Challenge(Boolean completed, String content, String title) {
         this.completed = completed;
+        this.content = content;
+        this.title = title;
     }
 
     public Challenge() {

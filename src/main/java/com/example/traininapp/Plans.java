@@ -30,17 +30,19 @@ public class Plans {
     @OneToMany(mappedBy = "plan")
     private List<DoneExercise> doneExercises;
 
-    public Plans(Long id, String name, String difficulty, Integer daysCount) {
-        this.id = id;
-        this.name = name;
-        this.difficulty = difficulty;
+    public Plans(List<DoneExercise> doneExercises, Integer daysCount, String difficulty, String name, Long id) {
+        this.doneExercises = doneExercises;
         this.daysCount = daysCount;
+        this.difficulty = difficulty;
+        this.name = name;
+        this.id = id;
     }
 
-    public Plans(String name, String difficulty, Integer daysCount) {
+    public Plans(String name, String difficulty, Integer daysCount, List<DoneExercise> doneExercises) {
         this.name = name;
         this.difficulty = difficulty;
         this.daysCount = daysCount;
+        this.doneExercises = doneExercises;
     }
 
     public Plans() {

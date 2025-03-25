@@ -31,19 +31,22 @@ public class User {
     @OneToMany(mappedBy = "workoutOwner")
     private List<Workout> workouts;
 
-    public User(String name, String surname, String email, String password) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.password = password;
-    }
 
-    public User(Long id, String name, String surname, String email, String password) {
+    public User(Long id, String name, String surname, String email, String password, List<Workout> workouts) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
+        this.workouts = workouts;
+    }
+
+    public User(List<Workout> workouts, String password, String email, String surname, String name) {
+        this.workouts = workouts;
+        this.password = password;
+        this.email = email;
+        this.surname = surname;
+        this.name = name;
     }
 
     public User() {
