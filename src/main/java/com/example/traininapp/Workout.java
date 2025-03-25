@@ -27,9 +27,8 @@ public class Workout {
             generator = "workout_sequence"
     )
     private Long id;
-//    future foreign key
-//    @ManyToOne @JoinColumn(name = "workout_owner", referencedColumnName = "id")
-//    private User workoutOwner;
+
+
 
     private String name;
     private Time timeSpent;
@@ -38,6 +37,9 @@ public class Workout {
     private float burntKcal;
     @OneToMany(mappedBy = "workout")
     private List<DoneExercise> doneExercises;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User workoutOwner;
 
     public Workout(Long id, String name, Time timeSpent, LocalDate date, Integer avgHeartRate, float burntKcal) {
         this.id = id;

@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -26,6 +28,8 @@ public class User {
     private String surname;
     private String email;
     private String password;
+    @OneToMany(mappedBy = "workoutOwner")
+    private List<Workout> workouts;
 
     public User(String name, String surname, String email, String password) {
         this.name = name;
