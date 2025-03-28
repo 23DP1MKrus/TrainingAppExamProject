@@ -1,5 +1,6 @@
-package com.example.traininapp;
+package com.example.traininapp.PlanPack;
 
+import com.example.traininapp.DoneExPack.DoneExercise;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

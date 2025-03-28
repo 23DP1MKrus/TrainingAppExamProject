@@ -1,9 +1,9 @@
-package com.example.traininapp;
+package com.example.traininapp.ChallengePack;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepo extends JpaRepository<User, Integer> {
+public interface ChallengeRepo extends JpaRepository<Challenge, Long> {
     // TODO: Create required queries
 }

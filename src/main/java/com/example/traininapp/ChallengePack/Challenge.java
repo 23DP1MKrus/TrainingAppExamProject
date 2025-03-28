@@ -1,4 +1,4 @@
-package com.example.traininapp;
+package com.example.traininapp.ChallengePack;
 
 import jakarta.persistence.*;
 import lombok.Getter;
