@@ -1,6 +1,7 @@
 package com.example.traininapp.PlanPack;
 
 import com.example.traininapp.DoneExPack.DoneExercise;
+import com.example.traininapp.WorkoutPack.Workout;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,24 +27,27 @@ public class Plans {
     )
     private Long id;
     private String name;
+    private String description;
     private String difficulty;
     private Integer daysCount;
     @OneToMany(mappedBy = "plan")
-    private List<DoneExercise> doneExercises;
+    private List<Workout> workouts;
 
-    public Plans(List<DoneExercise> doneExercises, Integer daysCount, String difficulty, String name, Long id) {
-        this.doneExercises = doneExercises;
+    public Plans(List<Workout> workouts, Integer daysCount, String difficulty, String name, Long id,String description) {
+        this.workouts = workouts;
         this.daysCount = daysCount;
         this.difficulty = difficulty;
         this.name = name;
         this.id = id;
+        this.description = description;
     }
 
-    public Plans(String name, String difficulty, Integer daysCount, List<DoneExercise> doneExercises) {
+    public Plans(String name, String description ,String difficulty, Integer daysCount, List<Workout> workouts) {
         this.name = name;
         this.difficulty = difficulty;
         this.daysCount = daysCount;
-        this.doneExercises = doneExercises;
+        this.workouts = workouts;
+        this.description = description;
     }
 
     public Plans() {
