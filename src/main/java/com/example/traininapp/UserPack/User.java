@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
@@ -29,7 +30,7 @@ public class User {
     private String surname;
     private String email;
     private String password;
-    @OneToMany(mappedBy = "workoutOwner")
+    @OneToMany(mappedBy = "workoutOwner", fetch = FetchType.EAGER)
     private List<Workout> workouts;
 
 

@@ -3,6 +3,8 @@ package com.example.traininapp.Views;
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
+import com.vaadin.flow.component.Text;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -14,6 +16,7 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.LinkedList;
 import java.util.List;
 
 @Route("register")
@@ -44,16 +47,29 @@ public class RegisterView extends VerticalLayout {
 
         HorizontalLayout userNameSurnameLayout = new HorizontalLayout(name, surname);
         userNameSurnameLayout.setWidth("100%");
-
+        Text error = new Text("");
         Button registerButton = new Button("Register");
         registerButton.setClassName("register-button");
-//        registerButton.addClickListener(e -> {
-//            List<Workout> userWorkouts = null;
-//            User newUser = new User(userWorkouts,String userName = name.getValue(),);
-//            userService.addUser(newUser);
-//        });
-//
-        formLayout.add(name, surname, email, password, registerButton);
+        registerButton.addClickListener(e -> {
+            try {
+                List<Workout> workoutList = new LinkedList<>();
+                User newUser = new User(
+                        workoutList,
+                        password.getValue(),
+                        email.getValue(),
+                        surname.getValue(),
+                        name.getValue());
+                userService.addUser(newUser);
+                UI.getCurrent().navigate("login");
+               // System.out.println(userService.getAllUsers());
+            }
+            catch (Exception ex) {
+                error.setText(ex.getMessage());
+                throw new IllegalStateException(ex);
+            }
+        });
+
+        formLayout.add(name, surname, email, password,error, registerButton);
         add(formLayout);
     }
 }
