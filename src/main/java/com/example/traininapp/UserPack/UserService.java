@@ -30,4 +30,13 @@ public class UserService {
 
     }
 
+    public boolean canLogin(String email) {
+        Optional<User> userOpt = userRepo.findByEmail(email);
+        if (userOpt.isPresent()) {
+            return true;
+        }
+        else{
+            throw new IllegalStateException("User with email " + email + " does not exist or email is not valid");
+        }
+}
 }
