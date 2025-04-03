@@ -28,11 +28,11 @@ public class Exercise {
     private Long id;
     private String name;
     private String description;
-    private VarbinaryJdbcType image;
+    private String image;
     @OneToMany(mappedBy = "exercise")
     private List<DoneExercise> doneExercises;
 
-    public Exercise(Long id, String name, String description, VarbinaryJdbcType image, List<DoneExercise> doneExercises) {
+    public Exercise(Long id, String name, String description, String image, List<DoneExercise> doneExercises) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -40,7 +40,7 @@ public class Exercise {
         this.doneExercises = doneExercises;
     }
 
-    public Exercise(List<DoneExercise> doneExercises, VarbinaryJdbcType image, String description, String name) {
+    public Exercise(List<DoneExercise> doneExercises, String image, String description, String name) {
         this.doneExercises = doneExercises;
         this.image = image;
         this.description = description;
