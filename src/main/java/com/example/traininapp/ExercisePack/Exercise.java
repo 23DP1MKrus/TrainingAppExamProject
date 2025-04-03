@@ -14,7 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class Exercices {
+public class Exercise {
     @Id
     @SequenceGenerator(
             name = "exercices_sequence",
@@ -32,7 +32,7 @@ public class Exercices {
     @OneToMany(mappedBy = "exercise")
     private List<DoneExercise> doneExercises;
 
-    public Exercices(Long id, String name, String description, VarbinaryJdbcType image, List<DoneExercise> doneExercises) {
+    public Exercise(Long id, String name, String description, VarbinaryJdbcType image, List<DoneExercise> doneExercises) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -40,14 +40,14 @@ public class Exercices {
         this.doneExercises = doneExercises;
     }
 
-    public Exercices(List<DoneExercise> doneExercises, VarbinaryJdbcType image, String description, String name) {
+    public Exercise(List<DoneExercise> doneExercises, VarbinaryJdbcType image, String description, String name) {
         this.doneExercises = doneExercises;
         this.image = image;
         this.description = description;
         this.name = name;
     }
 
-    public Exercices() {
+    public Exercise() {
 
     }
 }
