@@ -14,7 +14,7 @@ import java.util.List;
 @Configuration
 public class PlanConfig {
     @Bean
-    CommandLineRunner commandLineRunner(PlansRepo plansRepo) {
+    CommandLineRunner commandLineRunner2(PlansRepo plansRepo) {
         return args -> {
             Plans fullbody = new Plans(
                      "Full Body",

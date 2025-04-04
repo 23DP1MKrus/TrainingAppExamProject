@@ -10,7 +10,7 @@ import java.util.List;
 @Configuration
 public class ExerciseConfig {
     @Bean
-    CommandLineRunner commandLineRunner(ExercicesRepo exerciseRepo) {
+    CommandLineRunner commandLineRunner3(ExercicesRepo exerciseRepo) {
         return args -> {
             Exercise exercise1 = new Exercise(
                     new ArrayList<>(),

@@ -9,7 +9,7 @@ import java.util.List;
 @Configuration
 public class ChallengeConfig {
    @Bean
-   CommandLineRunner commandLineRunner(ChallengeRepo challengeRepo) {
+   CommandLineRunner commandLineRunner1(ChallengeRepo challengeRepo) {
        return args -> {
            Challenge challenge1 = new Challenge(
                    false,
