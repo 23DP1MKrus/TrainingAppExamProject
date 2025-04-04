@@ -6,6 +6,7 @@ import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -49,6 +50,7 @@ public class RegisterView extends VerticalLayout {
         userNameSurnameLayout.setWidth("100%");
         Text error = new Text("");
         Button registerButton = new Button("Register");
+        Anchor anchor = new Anchor("login", "Already have an account?");
         registerButton.setClassName("register-button");
         registerButton.addClickListener(e -> {
             try {
@@ -69,7 +71,7 @@ public class RegisterView extends VerticalLayout {
             }
         });
 
-        formLayout.add(name, surname, email, password,error, registerButton);
+        formLayout.add(name, surname, email, password,error, registerButton,anchor);
         add(formLayout);
     }
 }

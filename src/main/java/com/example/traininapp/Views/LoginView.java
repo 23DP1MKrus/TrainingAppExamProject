@@ -6,6 +6,7 @@ import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -40,6 +41,7 @@ public class LoginView extends VerticalLayout {
 
         Text error = new Text("");
         Button loginButton = new Button("Log in");
+        Anchor anchor = new Anchor("register", "Don't have an account yet?");
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
             if (userService.canLogin(email.getValue())) {
@@ -50,7 +52,7 @@ public class LoginView extends VerticalLayout {
             }
         });
 
-        formLayout.add(email, password,error, loginButton);
+        formLayout.add(email, password,error, loginButton,anchor);
         add(formLayout);
     }
     }
