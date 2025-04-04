@@ -1,6 +1,7 @@
 package com.example.traininapp.WorkoutPack;
 
 import com.example.traininapp.DoneExPack.DoneExercise;
+import com.example.traininapp.PlanPack.Plans;
 import com.example.traininapp.UserPack.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -42,6 +43,9 @@ public class Workout {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User workoutOwner;
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plans plan;
 
     public Workout(Long id, String name, Time timeSpent, LocalDate date, Integer avgHeartRate, float burntKcal, List<DoneExercise> doneExercises, User workoutOwner) {
         this.id = id;
