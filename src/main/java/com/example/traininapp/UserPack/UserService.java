@@ -12,7 +12,9 @@ public class UserService {
     private final String pattern = "^(?=(?:.*[A-Z]){2,})(?=(?:.*[a-z]){2,})(?=(?:.*\\d){2,})(?=(?:.*[^a-zA-Z\\d]){1,}).{7,}$";
     private UserRepo userRepo;
     @Autowired
-    public UserService(UserRepo userRepo) {this.userRepo = userRepo;}
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
     public List<User> getAllUsers() {
         return userRepo.findAll();
