@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ExercicesRepo extends JpaRepository<Exercise, Long> {
+public interface ExercisesRepo extends JpaRepository<Exercise, Long> {
 }

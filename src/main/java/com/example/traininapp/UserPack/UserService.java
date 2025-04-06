@@ -1,6 +1,9 @@
 package com.example.traininapp.UserPack;
 
 
+import com.example.traininapp.DoneExPack.DoneExercise;
+import com.example.traininapp.ExercisePack.Exercise;
+import com.example.traininapp.WorkoutPack.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +44,9 @@ public class UserService {
             throw new IllegalStateException("User with email " + email + " does not exist or email is not valid");
         }
 }
+    public void addWorkout(Workout workout, Long userId) {
+        User user = userRepo.findById(userId).orElseThrow(() -> new IllegalStateException("No such user found"));
+        user.getWorkouts().add(workout);
+        workout.setWorkoutOwner(user);
+    }
 }

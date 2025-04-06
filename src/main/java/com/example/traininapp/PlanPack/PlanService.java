@@ -1,5 +1,7 @@
 package com.example.traininapp.PlanPack;
 
+import com.example.traininapp.UserPack.User;
+import com.example.traininapp.WorkoutPack.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,12 @@ public class PlanService {
     public Plans getPlan(Long Id) {
         Optional<Plans> planOpt = planRepo.findById(Id);
         return planOpt.orElse(null);
+    }
+
+    public void addWorkout(Workout workout, Long userId) {
+        Plans plan = planRepo.findById(userId).orElseThrow(() -> new IllegalStateException("No such plan found"));
+        plan.getWorkouts().add(workout);
+        workout.setPlan(plan);
     }
 
 }
