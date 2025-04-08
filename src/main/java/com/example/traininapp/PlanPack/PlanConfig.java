@@ -2,6 +2,7 @@ package com.example.traininapp.PlanPack;
 
 
 import com.example.traininapp.DoneExPack.DoneExercise;
+import com.example.traininapp.WorkoutPack.Workout;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
