@@ -38,26 +38,31 @@ public class LogWorkoutView extends Div {
        leftContainer.setId("left-container");
        Image logo = new Image();
        logo.setClassName("logo");
+
        Paragraph plansAnchorText = new Paragraph("PLANS");
        Anchor anchorPlans = new Anchor("plans");
        anchorPlans.setClassName("nav-link");
        plansAnchorText.setClassName("nav-link-text");
        plansAnchorText.add(anchorPlans);
+
        Paragraph exerciseAnchorText = new Paragraph("Exercises");
        Anchor linkExercises = new Anchor("exercises");
        linkExercises.setClassName("nav-link");
        exerciseAnchorText.setClassName("nav-link-text");
        exerciseAnchorText.add(linkExercises);
+
        Paragraph mainAnchorText = new Paragraph("MAIN");
        Anchor anchorMain = new Anchor("main");
        anchorMain.setClassName("nav-link");
        mainAnchorText.setClassName("nav-link-text");
        mainAnchorText.add(anchorMain);
+
        Paragraph workoutsAnchorText = new Paragraph("WORKOUTS");
        Anchor anchorWorkouts = new Anchor("workouts");
        anchorWorkouts.setClassName("nav-link");
        workoutsAnchorText.setClassName("nav-link-text");
        workoutsAnchorText.add(anchorWorkouts);
+
        leftContainer.add(logo,plansAnchorText,exerciseAnchorText,mainAnchorText,workoutsAnchorText);
 
        HorizontalLayout topContainer = new HorizontalLayout();
