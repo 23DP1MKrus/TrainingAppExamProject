@@ -1,6 +1,5 @@
 package com.example.traininapp.PlanPack;
 
-import com.example.traininapp.UserPack.User;
 import com.example.traininapp.WorkoutPack.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,13 @@ public class PlanService {
 
     public List<Plans> getAllPlans() {
         return planRepo.findAll();
+    }
+
+    public Optional<Plans> findAllByDaysCount(Integer daysCount) {
+        return planRepo.findAllByDaysCount(daysCount);
+    }
+    public Optional<Plans> findAllByDifficulty(String difficulty) {
+        return planRepo.findAllByDifficulty(difficulty);
     }
 
     public Plans getPlan(Long Id) {

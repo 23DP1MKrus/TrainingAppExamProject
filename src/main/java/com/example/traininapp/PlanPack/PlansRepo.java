@@ -9,6 +9,9 @@ import java.util.Optional;
 
 @Repository
 public interface PlansRepo extends JpaRepository<Plans, Long> {
-//    @Query
-//    Optional<Plans> findById(Long Id);
+    @Query
+    Optional<Plans> findAllByDifficulty(String difficulty);
+
+    @Query
+    Optional<Plans> findAllByDaysCount(Integer daysCount);
 }
