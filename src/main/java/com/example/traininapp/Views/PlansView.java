@@ -80,4 +80,29 @@ public class PlansView extends Div {
         VerticalLayout middleContainer = new VerticalLayout();
         middleContainer.setId("middle-container");
 
+        VerticalLayout filtersContainer = new VerticalLayout();
+        filtersContainer.setId("filters-container");
+        H1 filterBy = new H1("filter by");
+        filterBy.setClassName("filterBy-title");
+        Select<String> addFilters = new Select<>();
+        addFilters.setClassName("add-filters");
+        middleContainer.add(filtersContainer);
+
+        VerticalLayout plansContainer = new VerticalLayout();
+        exerciseContainer.setId("plans-container");
+        H1 foundPlans = new H1("FOUND PLANS FOR YOU");
+        chooseExercise.setClassName("found-plans-title");
+        plansContainer.add(foundPlans);
+        List<Plans> plansList = plansService.getAllPlans();
+        for (plans plan : plansList) {
+            HorizontalLayout exerciseDiv = new HorizontalLayout();
+            plansDiv.setClassName("plans-div");
+            H1 planTitle = new H1(plan.getName());
+            planTitle.setClassName("plan-title");
+            Paragraph difficulty = new Paragraph(plan.getDifficulty());
+            difficulty.setClassName("difficulty");
+            Paragraph days = new Paragraph(plan.getDaysCount());
+            days.setClassName("days");
+            plansDiv.add(planTitle, difficulty, days);
+            plansContainer.add(plansDiv);
     }
