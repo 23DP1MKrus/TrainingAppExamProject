@@ -1,80 +1,60 @@
 package com.example.traininapp.Views;
 
-
-import com.example.traininapp.DoneExPack.DoneExService;
-import com.example.traininapp.ExercisePack.Exercise;
-import com.example.traininapp.ExercisePack.ExerciseService;
-import com.example.traininapp.WorkoutPack.Workout;
-import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.example.traininapp.PlanPack.PlanService;
+import com.example.traininapp.PlanPack.Plans;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
-import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Route("Plans")
+@Route("plans")
 public class PlansView extends Div {
-    private final PlansService palnsService;
+    private final PlanService planService;
 
     @Autowired
-    public PlansView(PlansService plansService) {
-        this.plansService = plansService;
-        setId("plans");
+    public PlansView(PlanService planService) {
+        this.planService = planService;
+        setId("plans-view");
 
         Div plansDiv = new Div();
         plansDiv.setId("plans-div");
 
         VerticalLayout leftContainer = new VerticalLayout();
         leftContainer.setId("left-container");
+
         Image logo = new Image();
         logo.setClassName("logo");
 
-        Paragraph plansAnchorText = new Paragraph("PLANS");
-        Anchor anchorPlans = new Anchor("plans");
-        anchorPlans.setClassName("nav-link");
-        plansAnchorText.setClassName("nav-link-text");
-        plansAnchorText.add(anchorPlans);
-
-        Paragraph exerciseAnchorText = new Paragraph("Exercises");
-        Anchor linkExercises = new Anchor("exercises");
-        linkExercises.setClassName("nav-link");
-        exerciseAnchorText.setClassName("nav-link-text");
-        exerciseAnchorText.add(linkExercises);
-
-        Paragraph mainAnchorText = new Paragraph("MAIN");
-        Anchor anchorMain = new Anchor("main");
-        anchorMain.setClassName("nav-link");
-        mainAnchorText.setClassName("nav-link-text");
-        mainAnchorText.add(anchorMain);
-
-        Paragraph workoutsAnchorText = new Paragraph("WORKOUTS");
-        Anchor anchorWorkouts = new Anchor("workouts");
-        anchorWorkouts.setClassName("nav-link");
-        workoutsAnchorText.setClassName("nav-link-text");
-        workoutsAnchorText.add(anchorWorkouts);
-
-        leftContainer.add(logo, plansAnchorText, exerciseAnchorText, mainAnchorText, workoutsAnchorText);
+        leftContainer.add(
+                createNavLink("PLANS", "plans"),
+                createNavLink("Exercises", "exercises"),
+                createNavLink("MAIN", "main"),
+                createNavLink("WORKOUTS", "workouts")
+        );
 
         HorizontalLayout topContainer = new HorizontalLayout();
         topContainer.setId("top-container");
+
         H1 title = new H1("PLANS");
         title.setClassName("title");
 
         Image searchIcon = new Image();
         Button searchBtn = new Button(searchIcon);
         searchBtn.setClassName("topBtn");
+
         Image ringIcon = new Image();
         Button ringBtn = new Button(ringIcon);
         ringBtn.setClassName("topBtn");
+
         Image profileIcon = new Image();
         Button profileBtn = new Button(profileIcon);
         profileBtn.setClassName("topBtn");
+
         topContainer.add(title, searchBtn, ringBtn, profileBtn);
 
         VerticalLayout middleContainer = new VerticalLayout();
@@ -82,27 +62,61 @@ public class PlansView extends Div {
 
         VerticalLayout filtersContainer = new VerticalLayout();
         filtersContainer.setId("filters-container");
-        H1 filterBy = new H1("filter by");
-        filterBy.setClassName("filterBy-title");
-        Select<String> addFilters = new Select<>();
-        addFilters.setClassName("add-filters");
-        middleContainer.add(filtersContainer);
+
+        H1 filterTitle = new H1("filter by:");
+        filterTitle.setClassName("filterBy-title");
+
+        Select<String> difficultyFilter = new Select<>();
+        difficultyFilter.setItems("Beginner", "Intermediate", "Advanced");
+        difficultyFilter.setPlaceholder("Difficulty");
+
+        Select<String> daysFilter = new Select<>();
+        daysFilter.setItems("3 days", "4 days", "5 days");
+        daysFilter.setPlaceholder("Days");
+
+        filtersContainer.add(filterTitle, difficultyFilter, daysFilter);
 
         VerticalLayout plansContainer = new VerticalLayout();
-        exerciseContainer.setId("plans-container");
+        plansContainer.setId("plans-container");
+
         H1 foundPlans = new H1("FOUND PLANS FOR YOU");
-        chooseExercise.setClassName("found-plans-title");
+        foundPlans.setClassName("found-plans-title");
+
         plansContainer.add(foundPlans);
-        List<Plans> plansList = plansService.getAllPlans();
-        for (plans plan : plansList) {
-            HorizontalLayout exerciseDiv = new HorizontalLayout();
-            plansDiv.setClassName("plans-div");
-            H1 planTitle = new H1(plan.getName());
-            planTitle.setClassName("plan-title");
+
+        List<Plans> plansList = planService.getAllPlans();
+        for (Plans plan : plansList) {
+            HorizontalLayout planDiv = new HorizontalLayout();
+            planDiv.setClassName("plan-div");
+
+            H2 planName = new H2(plan.getName());
+            planName.setClassName("plan-title");
+
             Paragraph difficulty = new Paragraph(plan.getDifficulty());
             difficulty.setClassName("difficulty");
-            Paragraph days = new Paragraph(plan.getDaysCount());
+
+            Paragraph days = new Paragraph(plan.getDaysCount() + " days");
             days.setClassName("days");
-            plansDiv.add(planTitle, difficulty, days);
-            plansContainer.add(plansDiv);
+
+            planDiv.add(planName, difficulty, days);
+            plansContainer.add(planDiv);
+        }
+
+        middleContainer.add(filtersContainer, plansContainer);
+
+        plansDiv.add(leftContainer, topContainer, middleContainer);
+        add(plansDiv);
     }
+
+    private HorizontalLayout createNavLink(String text, String route) {
+        Paragraph anchorText = new Paragraph(text);
+        Anchor anchor = new Anchor(route, "");
+        anchor.setClassName("nav-link");
+        anchorText.setClassName("nav-link-text");
+        anchorText.add(anchor);
+        HorizontalLayout navLayout = new HorizontalLayout();
+        navLayout.add(anchorText);
+        return navLayout;
+    }
+}
+
