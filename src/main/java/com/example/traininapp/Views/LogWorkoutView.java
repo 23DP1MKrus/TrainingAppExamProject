@@ -6,14 +6,12 @@ import com.example.traininapp.DoneExPack.DoneExercise;
 import com.example.traininapp.ExercisePack.Exercise;
 import com.example.traininapp.ExercisePack.ExerciseService;
 import com.example.traininapp.PlanPack.PlanService;
-import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -21,15 +19,12 @@ import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
-import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Route("logWorkout")

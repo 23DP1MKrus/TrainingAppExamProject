@@ -1,8 +1,6 @@
 package com.example.traininapp.UserPack;
 
 
-import com.example.traininapp.DoneExPack.DoneExercise;
-import com.example.traininapp.ExercisePack.Exercise;
 import com.example.traininapp.WorkoutPack.Workout;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
