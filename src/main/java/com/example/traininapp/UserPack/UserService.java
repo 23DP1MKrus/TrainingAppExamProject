@@ -22,6 +22,9 @@ public class UserService {
     public List<User> getAllUsers() {
         return userRepo.findAll();
     }
+    public Optional<User> findByEmail(String email) {
+        return userRepo.findByEmail(email);
+    }
     public void addUser(User user) {
         Optional<User> userOpt = userRepo.findByEmail(user.getEmail());
         if (userOpt.isPresent()) {

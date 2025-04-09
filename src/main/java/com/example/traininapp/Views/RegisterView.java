@@ -14,6 +14,7 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -64,6 +65,8 @@ public class RegisterView extends VerticalLayout {
                 userService.addUser(newUser);
                 UI.getCurrent().navigate("login");
                // System.out.println(userService.getAllUsers());
+                VaadinSession session = VaadinSession.getCurrent();
+                session.setAttribute("email",null);
             }
             catch (Exception ex) {
                 error.setText(ex.getMessage());

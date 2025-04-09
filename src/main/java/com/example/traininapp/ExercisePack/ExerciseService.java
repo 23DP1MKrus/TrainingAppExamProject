@@ -16,7 +16,9 @@ public class ExerciseService {
     public List<Exercise> getAllExercises(){
         return exercisesRepo.findAll();
     }
-
+    public Exercise getExerciseById(long id){
+        return exercisesRepo.findById(id).orElseThrow(() -> new IllegalStateException("Exercise with id " + id + " not found!"));
+    }
     public void addDoneExercise(DoneExercise doneExercise, Long exerciseId) {
         Exercise exercise = exercisesRepo.findById(exerciseId).orElseThrow(() -> new IllegalStateException("Exercise not found"));
         exercise.getDoneExercises().add(doneExercise);

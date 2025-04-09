@@ -14,6 +14,7 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -46,6 +47,8 @@ public class LoginView extends VerticalLayout {
         loginButton.addClickListener(e -> {
             if (userService.canLogin(email.getValue())) {
                 UI.getCurrent().navigate("main");
+                VaadinSession session = VaadinSession.getCurrent();
+                session.setAttribute("email",email.getValue());
             }
             else {
                 error.setText("login-error");

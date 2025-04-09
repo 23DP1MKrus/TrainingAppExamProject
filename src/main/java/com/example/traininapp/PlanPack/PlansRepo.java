@@ -14,4 +14,7 @@ public interface PlansRepo extends JpaRepository<Plans, Long> {
 
     @Query
     Optional<Plans> findAllByDaysCount(Integer daysCount);
+
+    @Query
+    Optional<Plans> findByName(String name);
 }

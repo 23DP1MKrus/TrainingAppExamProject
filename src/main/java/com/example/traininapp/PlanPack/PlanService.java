@@ -23,7 +23,9 @@ public class PlanService {
     public Optional<Plans> findAllByDifficulty(String difficulty) {
         return planRepo.findAllByDifficulty(difficulty);
     }
-
+    public Plans findByName(String name){
+        return planRepo.findByName(name).orElseThrow(() -> new IllegalStateException("No such plan"));
+    }
     public Plans getPlan(Long Id) {
         Optional<Plans> planOpt = planRepo.findById(Id);
         return planOpt.orElse(null);

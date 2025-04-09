@@ -10,6 +10,7 @@ import lombok.ToString;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 
@@ -34,7 +35,7 @@ public class Workout {
 
 
     private String name;
-    private Time timeSpent;
+    private LocalTime timeSpent;
     private LocalDate date;
     private Integer avgHeartRate;
     private float burntKcal;
@@ -47,7 +48,7 @@ public class Workout {
     @JoinColumn(name = "plan_id")
     private Plans plan;
 
-    public Workout(Long id, String name, Time timeSpent, LocalDate date, Integer avgHeartRate, float burntKcal, List<DoneExercise> doneExercises, User workoutOwner) {
+    public Workout(Long id, String name, LocalTime timeSpent, LocalDate date, Integer avgHeartRate, float burntKcal, List<DoneExercise> doneExercises, User workoutOwner, Plans plan) {
         this.id = id;
         this.name = name;
         this.timeSpent = timeSpent;
@@ -56,9 +57,10 @@ public class Workout {
         this.burntKcal = burntKcal;
         this.doneExercises = doneExercises;
         this.workoutOwner = workoutOwner;
+        this.plan = plan;
     }
 
-    public Workout(User workoutOwner, List<DoneExercise> doneExercises, float burntKcal, Integer avgHeartRate, LocalDate date, Time timeSpent, String name) {
+    public Workout(User workoutOwner, List<DoneExercise> doneExercises, float burntKcal, Integer avgHeartRate, LocalDate date, LocalTime timeSpent, String name, Plans plan) {
         this.workoutOwner = workoutOwner;
         this.doneExercises = doneExercises;
         this.burntKcal = burntKcal;
@@ -66,6 +68,7 @@ public class Workout {
         this.date = date;
         this.timeSpent = timeSpent;
         this.name = name;
+        this.plan = plan;
     }
 
     public Workout() {

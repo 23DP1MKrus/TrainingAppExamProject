@@ -2,20 +2,34 @@ package com.example.traininapp.Views;
 
 
 import com.example.traininapp.DoneExPack.DoneExService;
+import com.example.traininapp.DoneExPack.DoneExercise;
 import com.example.traininapp.ExercisePack.Exercise;
 import com.example.traininapp.ExercisePack.ExerciseService;
+import com.example.traininapp.PlanPack.PlanService;
+import com.example.traininapp.UserPack.User;
+import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
+import com.vaadin.flow.component.checkbox.CheckboxGroup;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
+import org.checkerframework.checker.units.qual.C;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Route("logWorkout")
@@ -23,12 +37,16 @@ public class LogWorkoutView extends Div {
    private final WorkoutService workoutService;
    private final ExerciseService exerciseService;
    private final DoneExService doneExService;
+   private final UserService userService;
+   private final PlanService planService;
 
    @Autowired
-    public LogWorkoutView(WorkoutService workoutService, ExerciseService exerciseService, DoneExService doneExService) {
+    public LogWorkoutView(WorkoutService workoutService, ExerciseService exerciseService, DoneExService doneExService,  UserService userService,  PlanService planService) {
        this.workoutService = workoutService;
        this.exerciseService = exerciseService;
        this.doneExService = doneExService;
+       this.userService = userService;
+       this.planService = planService;
        setId("log-workout");
 
        Div workoutDiv = new Div();
@@ -105,7 +123,7 @@ public class LogWorkoutView extends Div {
        bpmField.setId("bpm-field");
        TextField timeSpendField = new TextField("time spend");
        timeSpendField.setId("time-spend-field");
-       TextField dateField = new TextField("date");
+       TextField dateField = new TextField("date(2025-04-09)");
        dateField.setId("date-field");
        formContainer.add(titleField, bpmField, timeSpendField, dateField);
 
@@ -115,6 +133,7 @@ public class LogWorkoutView extends Div {
        chooseExercise.setClassName("choose-exercise-title");
        exerciseContainer.add(chooseExercise);
        List<Exercise> exerciseList = exerciseService.getAllExercises();
+       List<Checkbox> checkboxList = new ArrayList<>();
        for (Exercise exercise : exerciseList) {
            HorizontalLayout exerciseDiv = new HorizontalLayout();
            exerciseDiv.setClassName("exercise-div");
@@ -125,12 +144,50 @@ public class LogWorkoutView extends Div {
            TextField sets = new TextField("sets");
            sets.setClassName("sets-field");
            Checkbox addExercise = new Checkbox();
+           addExercise.setId(String.valueOf(exercise.getId()));
+           checkboxList.add(addExercise);
            exerciseDiv.add(exerciseTitle, reps, sets,addExercise);
            exerciseContainer.add(exerciseDiv);
        }
-//       logWorkout.addClickListener(e -> {
-//           Workout workout = new Workout();
-//       });
+
+       logWorkout.addClickListener(e -> {
+           VaadinSession session = VaadinSession.getCurrent();
+           String sessionEmail = session.getAttribute("email").toString();
+           DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+           DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+           List<DoneExercise> addedDoneExList = new ArrayList<>();
+            for (Component component : exerciseContainer.getChildren().toList()) {
+                List<Component> innerExComponentsList = component.getChildren().toList();
+                if (!innerExComponentsList.isEmpty()) {
+                    Checkbox innerDoneExCheckbox = ((Checkbox) innerExComponentsList.get(3));
+                    if ((innerDoneExCheckbox.getValue().equals(true))) {
+                        DoneExercise doneExercise = new DoneExercise();
+                        doneExercise.setSets(Integer.parseInt(((TextField) innerExComponentsList.get(2)).getValue()));
+                        doneExercise.setReps(Integer.parseInt(((TextField) innerExComponentsList.get(1)).getValue()));
+                        doneExercise.setExercise(exerciseList.get(indexOf(component)+1));
+                        addedDoneExList.add(doneExercise);
+
+                    }
+                }
+            }
+
+
+           Workout workout = new Workout(
+                   userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")),
+                   addedDoneExList,
+                   123.1f,
+                   Integer.valueOf(bpmField.getValue()),
+                   LocalDate.parse(dateField.getValue(), dateFormatter),
+                   LocalTime.parse(timeSpendField.getValue(),timeFormatter),
+                   titleField.getValue(),
+                   planService.findByName(selectPlan.getValue())
+                   );
+            workoutService.addWorkout(workout);
+            for(DoneExercise doneExercise : addedDoneExList){
+                doneExercise.setWorkout(workout);
+                doneExService.addDoneExercise(doneExercise);
+            }
+       });
        middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);
        workoutDiv.add(leftContainer, topContainer, middleContainer);
        add(workoutDiv);
