@@ -173,7 +173,7 @@ public class LogWorkoutView extends Div {
            Workout workout = new Workout(
                    userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")),
                    addedDoneExList,
-                   123.1f,
+                   Integer.parseInt(bpmField.getValue()) * 4f,
                    Integer.valueOf(bpmField.getValue()),
                    LocalDate.parse(dateField.getValue(), dateFormatter),
                    LocalTime.parse(timeSpendField.getValue(),timeFormatter),

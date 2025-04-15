@@ -69,7 +69,6 @@ public class Workout {
         this.name = name;
         this.plan = plan;
     }
-
     public Workout() {
 
     }
