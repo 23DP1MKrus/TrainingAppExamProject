@@ -134,6 +134,8 @@ public class LogWorkoutView extends Div {
            exerciseDiv.setClassName("exercise-div");
            H1 exerciseTitle = new H1(exercise.getName());
            exerciseTitle.setClassName("exercise-title");
+           TextField weight = new TextField("weight");
+           weight.setClassName("weight-field");
            TextField reps = new TextField("reps");
            reps.setClassName("reps-field");
            TextField sets = new TextField("sets");
@@ -141,7 +143,7 @@ public class LogWorkoutView extends Div {
            Checkbox addExercise = new Checkbox();
            addExercise.setId(String.valueOf(exercise.getId()));
            checkboxList.add(addExercise);
-           exerciseDiv.add(exerciseTitle, reps, sets,addExercise);
+           exerciseDiv.add(exerciseTitle, weight, reps, sets,addExercise);
            exerciseContainer.add(exerciseDiv);
        }
 
@@ -154,11 +156,12 @@ public class LogWorkoutView extends Div {
             for (Component component : exerciseContainer.getChildren().toList()) {
                 List<Component> innerExComponentsList = component.getChildren().toList();
                 if (!innerExComponentsList.isEmpty()) {
-                    Checkbox innerDoneExCheckbox = ((Checkbox) innerExComponentsList.get(3));
+                    Checkbox innerDoneExCheckbox = ((Checkbox) innerExComponentsList.get(4));
                     if ((innerDoneExCheckbox.getValue().equals(true))) {
                         DoneExercise doneExercise = new DoneExercise();
-                        doneExercise.setSets(Integer.parseInt(((TextField) innerExComponentsList.get(2)).getValue()));
-                        doneExercise.setReps(Integer.parseInt(((TextField) innerExComponentsList.get(1)).getValue()));
+                        doneExercise.setWeight(Integer.parseInt(((TextField) innerExComponentsList.get(1)).getValue()));
+                        doneExercise.setSets(Integer.parseInt(((TextField) innerExComponentsList.get(3)).getValue()));
+                        doneExercise.setReps(Integer.parseInt(((TextField) innerExComponentsList.get(2)).getValue()));
                         doneExercise.setExercise(exerciseList.get(indexOf(component)+1));
                         addedDoneExList.add(doneExercise);
 

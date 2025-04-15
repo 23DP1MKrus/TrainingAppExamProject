@@ -34,21 +34,23 @@ public class DoneExercise {
     private Workout workout;
 
 
-
+    private int weight;
     private int reps;
     private int sets;
 
-    public DoneExercise(Long id, Exercise exercise, Workout workout, int reps, int sets) {
+    public DoneExercise(Long id, Exercise exercise, Workout workout, int reps, int sets, int weight) {
         this.id = id;
         this.exercise = exercise;
         this.workout = workout;
         this.reps = reps;
         this.sets = sets;
+        this.weight = weight;
     }
 
-    public DoneExercise(int sets, int reps, Workout workout, Exercise exercise) {
+    public DoneExercise(int sets, int reps, Workout workout, Exercise exercise, int weight) {
         this.sets = sets;
         this.reps = reps;
+        this.weight = weight;
         this.workout = workout;
         this.exercise = exercise;
     }
