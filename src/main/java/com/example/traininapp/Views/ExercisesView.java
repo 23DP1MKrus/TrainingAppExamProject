@@ -85,7 +85,7 @@ public class ExercisesView extends Div {
             H1 exerciseName = new H1(exercise.getName());
             exerciseName.setClassName("exercise-name");
             Paragraph exerciseDescription = new Paragraph(exercise.getDescription());
-            exTextContainer.add(exerciseDescription, exerciseName);
+            exTextContainer.add(exerciseName, exerciseDescription);
             Image exerciseImage = new Image(exercise.getImage(), exercise.getName());
             exerciseImage.setClassName("exercise-image");
             exerciseContainer.add(line,exTextContainer,exerciseImage);

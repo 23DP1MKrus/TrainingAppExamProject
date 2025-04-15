@@ -182,6 +182,7 @@ public class LogWorkoutView extends Div {
                 doneExercise.setWorkout(workout);
                 doneExService.addDoneExercise(doneExercise);
             }
+            userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")).getWorkouts().add(workout);
        });
        middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);
        workoutDiv.add(leftContainer, topContainer, middleContainer);
