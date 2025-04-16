@@ -41,7 +41,7 @@ public class UserService {
             return true;
         }
         else{
-            throw new IllegalStateException("User with email " + email + " does not exist or email is not valid");
+            throw new IllegalStateException("invalid email or password");
         }
 }
     public void addWorkout(Workout workout, Long userId) {
