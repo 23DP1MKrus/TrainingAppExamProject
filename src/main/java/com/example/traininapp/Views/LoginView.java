@@ -44,7 +44,7 @@ public class LoginView extends VerticalLayout {
         Anchor anchor = new Anchor("register", "Don't have an account yet?");
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
-            if (userService.canLogin(email.getValue())) {
+            if (userService.canLogin(email.getValue(), password.getValue())) {
                 UI.getCurrent().navigate("main");
             }
             else {

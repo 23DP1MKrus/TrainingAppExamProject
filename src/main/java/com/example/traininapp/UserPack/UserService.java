@@ -35,9 +35,9 @@ public class UserService {
 
     }
 
-    public boolean canLogin(String email) {
+    public boolean canLogin(String email, String password) {
         Optional<User> userOpt = userRepo.findByEmail(email);
-        if (userOpt.isPresent()) {
+        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
             return true;
         }
         else{

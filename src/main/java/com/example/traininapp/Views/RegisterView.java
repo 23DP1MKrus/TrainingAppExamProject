@@ -20,7 +20,7 @@ import org.springframework.stereotype.Repository;
 import java.util.LinkedList;
 import java.util.List;
 
-@Route("register")
+@Route("")
 public class RegisterView extends VerticalLayout {
     private final UserService userService;
 
