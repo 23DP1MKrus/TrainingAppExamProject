@@ -18,9 +18,10 @@ public class ChallengeService {
     public List<Challenge> getAllChallenges(){
         return challengeRepo.findAll();
     }
-    public Optional<Challenge> getRandomChallengeById() {
+    public Optional<Challenge> getRandomChallenge() {
         Random rand = new Random();
         Long randomId = rand.nextLong(1, getAllChallenges().size());
         return challengeRepo.findById(randomId);
     }
+
 }
