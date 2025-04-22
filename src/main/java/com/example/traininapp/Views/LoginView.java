@@ -1,14 +1,18 @@
 package com.example.traininapp.Views;
 
+import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +45,7 @@ public class LoginView extends VerticalLayout {
         Anchor anchor = new Anchor("register", "Don't have an account yet?");
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
-            if (userService.canLogin(email.getValue())) {
+            if (userService.canLogin(email.getValue(), password.getValue())) {
                 VaadinSession session = VaadinSession.getCurrent();
                 session.setAttribute("email",email.getValue());
                 UI.getCurrent().navigate("main");

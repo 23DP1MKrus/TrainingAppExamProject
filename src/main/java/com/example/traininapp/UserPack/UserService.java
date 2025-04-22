@@ -36,13 +36,13 @@ public class UserService {
 
     }
 
-    public boolean canLogin(String email) {
+    public boolean canLogin(String email, String password) {
         Optional<User> userOpt = userRepo.findByEmail(email);
-        if (userOpt.isPresent()) {
+        if (userOpt.isPresent() && userOpt.get().getPassword().equals(password)) {
             return true;
         }
         else{
-            throw new IllegalStateException("User with email " + email + " does not exist or email is not valid");
+            throw new IllegalStateException("invalid email or password");
         }
 }
     public void addWorkout(Workout workout, Long userId) {
