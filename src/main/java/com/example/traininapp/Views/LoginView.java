@@ -42,9 +42,9 @@ public class LoginView extends VerticalLayout {
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
             if (userService.canLogin(email.getValue())) {
-                UI.getCurrent().navigate("main");
                 VaadinSession session = VaadinSession.getCurrent();
                 session.setAttribute("email",email.getValue());
+                UI.getCurrent().navigate("main");
             }
             else {
                 error.setText("login-error");

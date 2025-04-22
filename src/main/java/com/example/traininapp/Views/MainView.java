@@ -2,6 +2,10 @@ package com.example.traininapp.Views;
 
 import com.example.traininapp.ChallengePack.Challenge;
 import com.example.traininapp.ChallengePack.ChallengeService;
+import com.example.traininapp.DoneExPack.DoneExercise;
+import com.example.traininapp.UserPack.User;
+import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.charts.Chart;
@@ -10,6 +14,7 @@ import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
@@ -20,11 +25,47 @@ import java.util.Random;
 public class MainView extends Div {
     private WorkoutService workoutService;
     private ChallengeService challengeService;
+    private UserService userService;
 
     @Autowired
-    public MainView(WorkoutService workoutService, ChallengeService challengeService) {
+    public MainView(UserService userService,WorkoutService workoutService, ChallengeService challengeService) {
+        this.userService = userService;
         this.workoutService = workoutService;
         this.challengeService = challengeService;
+
+        VaadinSession session = VaadinSession.getCurrent();
+        String sessionEmail = session.getAttribute("email").toString();
+        User user = userService.findByEmail(sessionEmail).orElseThrow(() -> new IllegalStateException("User not found"));
+        List<Workout> workouts = (!user.getWorkouts().isEmpty()) ? user.getWorkouts() : null;
+        Workout lastWorkout;
+        String lastWorkoutName;
+        String workoutDate;
+        String workoutTimeSpent;
+        String workoutBurntKcal;
+        int sets = 0;
+        int exCount = 0;
+        if (workouts != null) {
+            lastWorkout = workouts.get(workouts.size() - 1);
+            lastWorkoutName = lastWorkout.getName();
+            workoutDate = (String.valueOf(lastWorkout.getDate()));
+            workoutTimeSpent = (String.valueOf(lastWorkout.getTimeSpent()));
+            workoutBurntKcal = (String.valueOf(lastWorkout.getBurntKcal()));
+
+            for (DoneExercise doneExercise : lastWorkout.getDoneExercises()) {
+                exCount++;
+                sets += doneExercise.getSets();
+            }
+        }
+        else {
+            lastWorkout = null;
+            lastWorkoutName = "No Workout";
+            workoutDate = "0000-00-00";
+            workoutTimeSpent = "00:00";
+            workoutBurntKcal = "0";
+        }
+
+
+
         setId("main");
 
         Div mainContainer = new Div();
@@ -63,8 +104,14 @@ public class MainView extends Div {
         topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
 
 
-        HorizontalLayout centerContainer = new HorizontalLayout();
+        VerticalLayout centerContainer = new VerticalLayout();
         centerContainer.setId("center-container");
+
+        HorizontalLayout centerContainerUpperPart = new HorizontalLayout();
+        centerContainerUpperPart.setId("center-upper-part");
+
+        VerticalLayout centerContainerLowerPart = new VerticalLayout();
+        centerContainerLowerPart.setId("center-lower-part");
 
         HorizontalLayout firstContainerInCenter = new HorizontalLayout();
         firstContainerInCenter.setId("first-container");
@@ -114,7 +161,7 @@ public class MainView extends Div {
         burntCalWidgetTitle.add(burntCalIcon,burntCalTitle);
         Paragraph burntCals= new Paragraph();
         burntCals.setClassName("widget-context");
-        burntCals.setText("426"); //current user burnt cals
+        burntCals.setText(workoutBurntKcal); //current user burnt cals
         burntCalWidget.add(burntCalWidgetTitle,burntCals);
 
         VerticalLayout workTimeWidget = new VerticalLayout();
@@ -126,7 +173,7 @@ public class MainView extends Div {
         workTimeWidgetTitle.add(workTimeImage,workTimeTitle);
         Paragraph workoutTime = new Paragraph();
         workoutTime.setClassName("widget-context");
-        workoutTime.setText("1:20"); //current user workout time
+        workoutTime.setText(workoutTimeSpent); //current user workout time
         workTimeWidget.add(workTimeWidgetTitle,workoutTime);
 
         VerticalLayout setsCountWidget = new VerticalLayout();
@@ -138,7 +185,7 @@ public class MainView extends Div {
         setsCountWidgetTitle.add(setsCountWidgetImage,setsCountTitle);
         Paragraph setsCount= new Paragraph();
         setsCount.setClassName("widget-context");
-        setsCount.setText("426"); //current user burnt cals
+        setsCount.setText(String.valueOf(sets)); //current user burnt cals
         setsCountWidget.add(setsCountWidgetTitle,burntCals);
 
         VerticalLayout exCountWidget = new VerticalLayout();
@@ -146,20 +193,41 @@ public class MainView extends Div {
         HorizontalLayout exCountWidgetTitle = new HorizontalLayout();
         exCountWidgetTitle.setClassName("main-container-widget-title");
         Image exCountWidgetImage = new Image();
-        H1 exCountTitle = new H1("WORKOUT TIME");
+        H1 exCountTitle = new H1("EXERCISE COUNT");
         exCountWidgetTitle.add(exCountWidgetImage,exCountTitle);
         Paragraph exsCount = new Paragraph();
         workoutTime.setClassName("widget-context");
-        workoutTime.setText("6"); //current user workout time
+        workoutTime.setText(String.valueOf(exCount)); //current user workout time
         exCountWidget.add(exCountWidgetTitle,exsCount);
 
+
+        VerticalLayout thirdContainer = new VerticalLayout();
+        thirdContainer.setId("third-container");
+        Paragraph thirdContainerTitle = new Paragraph();
+        thirdContainerTitle.setId("third-container-title");
+        thirdContainerTitle.setText("Last Workout");
+        Span divider = new Span();
+        divider.setId("divider");
+        HorizontalLayout lastWorkoutContainer = new HorizontalLayout();
+        lastWorkoutContainer.setId("last-workout");
+        Paragraph lastWorkoutTitle = new Paragraph();
+        lastWorkoutTitle.setId("last-workout-title");
+        lastWorkoutTitle.setText(lastWorkoutName);
+        Paragraph lastWorkoutDate = new Paragraph();
+        lastWorkoutDate.setId("last-workout-date");
+        lastWorkoutDate.setText(workoutDate);
+        lastWorkoutContainer.add(lastWorkoutTitle,lastWorkoutDate);
+        thirdContainer.add(thirdContainerTitle,divider,lastWorkoutContainer);
 
         secondContainerUpper.add(burntCalWidget,workTimeWidget);
         secondContainerLower.add(setsCountWidget,exCountWidget);
 
         secondContainer.add(secondContainerUpper,secondContainerLower);
 
-        centerContainer.add(secondContainer,firstContainerInCenter);
+        centerContainerUpperPart.add(secondContainer,firstContainerInCenter);
+        centerContainerLowerPart.add(thirdContainer);
+
+        centerContainer.add(centerContainerUpperPart,centerContainerLowerPart);
 
         mainContainer.add(leftContainer,topContainer,centerContainer);
         add(mainContainer);
