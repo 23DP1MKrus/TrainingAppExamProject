@@ -62,26 +62,35 @@ public class WorkoutsView extends Div{
         Button profileBtn = new Button(profileIcon);
         profileBtn.setClassName("topBtn");
 
+        Button logWorkoutBtn = new Button("log workout");
+        logWorkoutBtn.setClassName("log-workout-button");
+
+
         topContainer.add(title, searchBtn, ringBtn, profileBtn);
 
         VerticalLayout workoutsContainer = new VerticalLayout();
         workoutsContainer.setId("workouts-container");
 
-        for(Workout workout :user.getWorkouts()){
-            HorizontalLayout workoutsField = new HorizontalLayout();
-            workoutsField.setClassName("workout-field");
-            Paragraph workoutDate = new Paragraph(String.valueOf(workout.getDate()));
-            workoutDate.setClassName("workout-date");
-            Paragraph  timeSpentHolder = new Paragraph("time-spent:");
-            timeSpentHolder.setClassName("workout-time-spent-holder");
-            Paragraph timeSpent = new Paragraph(String.valueOf(workout.getTimeSpent()));
-            timeSpent.setClassName("workout-time-spent");
-            Paragraph  burntCalHolder = new Paragraph("burnt-cals:");
-            burntCalHolder.setClassName("workout-burnt-cal-holder");
-            Paragraph burntCals = new Paragraph(String.valueOf(workout.getBurntKcal()));
-            burntCals.setClassName("workout-burnt-cals");
-            workoutsField.add(workoutDate,timeSpentHolder,timeSpent,burntCalHolder,burntCals);
-            workoutsContainer.add(workoutsField);
+        if (user.getWorkouts().isEmpty()) {
+            Paragraph noWorkouts = new Paragraph("Click 'log workout' to add your first workout.");
+            workoutsContainer.add(noWorkouts);
+        } else {
+            for (Workout workout : user.getWorkouts()) {
+                HorizontalLayout workoutsField = new HorizontalLayout();
+                workoutsField.setClassName("workout-field");
+                Paragraph workoutDate = new Paragraph(String.valueOf(workout.getDate()));
+                workoutDate.setClassName("workout-date");
+                Paragraph timeSpentHolder = new Paragraph("time-spent:");
+                timeSpentHolder.setClassName("workout-time-spent-holder");
+                Paragraph timeSpent = new Paragraph(String.valueOf(workout.getTimeSpent()));
+                timeSpent.setClassName("workout-time-spent");
+                Paragraph burntCalHolder = new Paragraph("burnt-cals:");
+                burntCalHolder.setClassName("workout-burnt-cal-holder");
+                Paragraph burntCals = new Paragraph(String.valueOf(workout.getBurntKcal()));
+                burntCals.setClassName("workout-burnt-cals");
+                workoutsField.add(workoutDate, timeSpentHolder, timeSpent, burntCalHolder, burntCals);
+                workoutsContainer.add(workoutsField);
+            }
         }
 
         workoutsDiv.add(leftContainer, topContainer, workoutsContainer);
