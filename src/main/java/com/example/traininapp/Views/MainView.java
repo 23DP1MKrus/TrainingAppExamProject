@@ -17,6 +17,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,6 +33,7 @@ public class MainView extends Div {
         this.userService = userService;
         this.workoutService = workoutService;
         this.challengeService = challengeService;
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         VaadinSession session = VaadinSession.getCurrent();
         String sessionEmail = session.getAttribute("email").toString();
@@ -48,10 +50,11 @@ public class MainView extends Div {
             lastWorkout = workouts.get(workouts.size() - 1);
             lastWorkoutName = lastWorkout.getName();
             workoutDate = (String.valueOf(lastWorkout.getDate()));
-            workoutTimeSpent = (String.valueOf(lastWorkout.getTimeSpent()));
+            workoutTimeSpent = (timeFormatter.format(lastWorkout.getTimeSpent()));
             workoutBurntKcal = (String.valueOf(lastWorkout.getBurntKcal()));
 
-            for (DoneExercise doneExercise : lastWorkout.getDoneExercises()) {
+            List<DoneExercise> lastWorkoutDoneExercises = lastWorkout.getDoneExercises();
+            for (DoneExercise doneExercise : lastWorkoutDoneExercises) {
                 exCount++;
                 sets += doneExercise.getSets();
             }
@@ -76,17 +79,18 @@ public class MainView extends Div {
 
         Image logo = new Image();
         logo.setClassName("logo");
-
+        leftContainer.add(logo);
         leftContainer.add(
-                createNavLink("PLANS", "plans"),
-                createNavLink("Exercises", "exercises"),
-                createNavLink("MAIN", "main"),
-                createNavLink("WORKOUTS", "workouts")
+            new Anchor("plans","PLANS"),
+            new Anchor("main","MAIN"),
+            new Anchor("workouts","WORKOUTS"),
+            new Anchor("exercises","EXERCISES")
         );
 
 
         HorizontalLayout topContainer = new HorizontalLayout();
         topContainer.setId("top-container");
+
         H1 title = new H1("PROFILE");
         title.setClassName("title");
         Button logWorkout = new Button("log workout");
@@ -95,12 +99,15 @@ public class MainView extends Div {
         Image searchIcon = new Image();
         Button searchBtn = new Button(searchIcon);
         searchBtn.setClassName("topBtn");
+
         Image ringIcon = new Image();
         Button ringBtn = new Button(ringIcon);
         ringBtn.setClassName("topBtn");
+
         Image profileIcon = new Image();
         Button profileBtn = new Button(profileIcon);
         profileBtn.setClassName("topBtn");
+
         topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
 
 
@@ -186,7 +193,7 @@ public class MainView extends Div {
         Paragraph setsCount= new Paragraph();
         setsCount.setClassName("widget-context");
         setsCount.setText(String.valueOf(sets)); //current user burnt cals
-        setsCountWidget.add(setsCountWidgetTitle,burntCals);
+        setsCountWidget.add(setsCountWidgetTitle,setsCount);
 
         VerticalLayout exCountWidget = new VerticalLayout();
         exCountWidget.setClassName("main-container-widget");
@@ -196,8 +203,8 @@ public class MainView extends Div {
         H1 exCountTitle = new H1("EXERCISE COUNT");
         exCountWidgetTitle.add(exCountWidgetImage,exCountTitle);
         Paragraph exsCount = new Paragraph();
-        workoutTime.setClassName("widget-context");
-        workoutTime.setText(String.valueOf(exCount)); //current user workout time
+        exsCount.setClassName("widget-context");
+        exsCount.setText(String.valueOf(exCount)); //current user workout time
         exCountWidget.add(exCountWidgetTitle,exsCount);
 
 

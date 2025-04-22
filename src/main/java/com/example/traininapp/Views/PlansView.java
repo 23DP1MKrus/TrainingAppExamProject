@@ -38,10 +38,10 @@ public class PlansView extends Div {
         logo.setClassName("logo");
 
         leftContainer.add(
-                createNavLink("PLANS", "plans"),
-                createNavLink("Exercises", "exercises"),
-                createNavLink("MAIN", "main"),
-                createNavLink("WORKOUTS", "workouts")
+                new Anchor("plans","PLANS"),
+                new Anchor("main","MAIN"),
+                new Anchor("workouts","WORKOUTS"),
+                new Anchor("exercises","EXERCISES")
         );
 
         HorizontalLayout topContainer = new HorizontalLayout();
@@ -62,7 +62,10 @@ public class PlansView extends Div {
         Button profileBtn = new Button(profileIcon);
         profileBtn.setClassName("topBtn");
 
-        topContainer.add(title, searchBtn, ringBtn, profileBtn);
+        Button logWorkoutBtn = new Button("log workout");
+        logWorkoutBtn.setClassName("log-workout-button");
+
+        topContainer.add(title, logWorkoutBtn,searchBtn, ringBtn, profileBtn);
 
         VerticalLayout middleContainer = new VerticalLayout();
         middleContainer.setId("middle-container");

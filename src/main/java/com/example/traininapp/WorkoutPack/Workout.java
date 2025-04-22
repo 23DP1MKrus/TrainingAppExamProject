@@ -38,7 +38,7 @@ public class Workout {
     private LocalDate date;
     private Integer avgHeartRate;
     private float burntKcal;
-    @OneToMany(mappedBy = "workout")
+    @OneToMany(mappedBy = "workout",fetch = FetchType.EAGER)
     private List<DoneExercise> doneExercises;
     @ManyToOne
     @JoinColumn(name = "user_id")

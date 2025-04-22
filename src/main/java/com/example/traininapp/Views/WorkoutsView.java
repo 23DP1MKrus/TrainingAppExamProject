@@ -36,12 +36,12 @@ public class WorkoutsView extends Div{
 
         Image logo = new Image();
         logo.setClassName("logo");
-
+        leftContainer.add(logo);
         leftContainer.add(
-                createNavLink("PLANS", "plans"),
-                createNavLink("Exercises", "exercises"),
-                createNavLink("MAIN", "main"),
-                createNavLink("WORKOUTS", "workouts")
+                new Anchor("plans","PLANS"),
+                new Anchor("main","MAIN"),
+                new Anchor("workouts","WORKOUTS"),
+                new Anchor("exercises","EXERCISES")
         );
 
         HorizontalLayout topContainer = new HorizontalLayout();
@@ -66,7 +66,7 @@ public class WorkoutsView extends Div{
         logWorkoutBtn.setClassName("log-workout-button");
 
 
-        topContainer.add(title, searchBtn, ringBtn, profileBtn);
+        topContainer.add(title, logWorkoutBtn,searchBtn, ringBtn, profileBtn);
 
         VerticalLayout workoutsContainer = new VerticalLayout();
         workoutsContainer.setId("workouts-container");
