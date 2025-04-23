@@ -53,14 +53,33 @@ public class LoginView extends VerticalLayout {
         Anchor anchor = new Anchor("register", "Don't have an account yet?");
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
-            if (userService.canLogin(email.getValue(), password.getValue())) {
+            if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"")){
+                Notification notification = new Notification();
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+                Div text = new Div(new Text("Email or password is empty!"));
+
+                Button closeButton = new Button(new Icon("lumo", "cross"));
+                closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                closeButton.setAriaLabel("Close");
+                closeButton.addClickListener(event -> {
+                    notification.close();
+                });
+
+                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                layout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+                notification.add(layout);
+                notification.open();
+            } else {
+                if (userService.canLogin(email.getValue(), password.getValue())) {
                     VaadinSession session = VaadinSession.getCurrent();
-                    session.setAttribute("email",email.getValue());
+                    session.setAttribute("email", email.getValue());
                     UI.getCurrent().navigate("main");
-                }
-                else {
+                } else {
                     error.setText("login-error");
                 }
+            }
         });
 
         formLayout.add(email, password,error, loginButton,anchor);
