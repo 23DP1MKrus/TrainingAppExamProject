@@ -189,23 +189,30 @@ public class LogWorkoutView extends Div {
                             notification.add(layout);
                             notification.open();
                         }
-//                        if (Objects.equals(valueBpm, "") || Objects.equals(valueTitle, "") || Objects.equals(valuePlan, "") || Objects.equals(valueDate, "") || Objects.equals(timeSpendFieldValue, "")) {
-//
-//                        }
-//                        else if(Objects.equals(weightValue, "") || Objects.equals(setsValue, "") || Objects.equals(repsValue, "")){
-//
-//                        }
-//                        else{
-//
-//
-//
-//
-//                        }
+
                     }
                 }
+           if (addedDoneExList.isEmpty()) {
+               Notification notification = new Notification();
+               notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
 
-           try{
-               if (!addedDoneExList.isEmpty()) {
+               Div text = new Div(new Text("Please add at least one exercise to your workout!"));
+
+               Button closeButton = new Button(new Icon("lumo", "cross"));
+               closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+               closeButton.setAriaLabel("Close");
+               closeButton.addClickListener(event -> {
+                   notification.close();
+               });
+
+               HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+               layout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+               notification.add(layout);
+               notification.open();
+           }else {
+
+               try{
                    Workout workout = new Workout(
                            userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")),
                            addedDoneExList,
@@ -222,12 +229,16 @@ public class LogWorkoutView extends Div {
                        doneExService.addDoneExercise(doneEx);
                    }
                    userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")).getWorkouts().add(workout);
+                   Notification notification = Notification
+                           .show("Workout added");
+                   notification.addThemeVariants(NotificationVariant.LUMO_PRIMARY);
+
                }
-               else{
+               catch (Exception ex) {
                    Notification notification = new Notification();
                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
 
-                   Div text = new Div(new Text("Please add at least one exercise to your workout!"));
+                   Div text = new Div(new Text("Please input all fields in workout!"));
 
                    Button closeButton = new Button(new Icon("lumo", "cross"));
                    closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
@@ -242,26 +253,9 @@ public class LogWorkoutView extends Div {
                    notification.add(layout);
                    notification.open();
                }
-
-           } catch (Exception ex) {
-               Notification notification = new Notification();
-               notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-               Div text = new Div(new Text("Please input all fields in workout!"));
-
-               Button closeButton = new Button(new Icon("lumo", "cross"));
-               closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-               closeButton.setAriaLabel("Close");
-               closeButton.addClickListener(event -> {
-                   notification.close();
-               });
-
-               HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-               layout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-               notification.add(layout);
-               notification.open();
            }
+
+
 
        });
        middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);

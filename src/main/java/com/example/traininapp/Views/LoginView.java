@@ -6,8 +6,14 @@ import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -16,6 +22,8 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.Objects;
 
 
 @Route("login")
@@ -46,13 +54,13 @@ public class LoginView extends VerticalLayout {
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
             if (userService.canLogin(email.getValue(), password.getValue())) {
-                VaadinSession session = VaadinSession.getCurrent();
-                session.setAttribute("email",email.getValue());
-                UI.getCurrent().navigate("main");
-            }
-            else {
-                error.setText("login-error");
-            }
+                    VaadinSession session = VaadinSession.getCurrent();
+                    session.setAttribute("email",email.getValue());
+                    UI.getCurrent().navigate("main");
+                }
+                else {
+                    error.setText("login-error");
+                }
         });
 
         formLayout.add(email, password,error, loginButton,anchor);
