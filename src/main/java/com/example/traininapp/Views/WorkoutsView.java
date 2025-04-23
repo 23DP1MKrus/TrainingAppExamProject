@@ -3,6 +3,8 @@ package com.example.traininapp.Views;
 import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.LeftNavigation;
+import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.UI;
@@ -32,49 +34,12 @@ public class WorkoutsView extends Div{
         Div workoutsDiv = new Div();
         workoutsDiv.setId("workouts-div");
 
-        VerticalLayout leftContainer = new VerticalLayout();
-        leftContainer.setId("left-container");
+        LeftNavigation leftContainer = new LeftNavigation();
 
-        Image logo = new Image();
-        logo.setClassName("logo");
-        leftContainer.add(logo);
-        leftContainer.add(
-                new Anchor("plans","PLANS"),
-                new Anchor("main","MAIN"),
-                new Anchor("workouts","WORKOUTS"),
-                new Anchor("exercises","EXERCISES")
-        );
-
-        HorizontalLayout topContainer = new HorizontalLayout();
-        topContainer.setId("top-container");
-
-        H1 title = new H1("VIEW YOUR WORKOUTS");
-        title.setClassName("title");
-
-        Image searchIcon = new Image();
-        Button searchBtn = new Button(searchIcon);
-        searchBtn.setClassName("topBtn");
-
-        Image ringIcon = new Image();
-        Button ringBtn = new Button(ringIcon);
-        ringBtn.setClassName("topBtn");
-
-        Image profileIcon = new Image();
-        Button profileBtn = new Button(profileIcon);
-        profileBtn.setClassName("topBtn");
-
-        Button logWorkoutBtn = new Button("log workout");
-        logWorkoutBtn.setClassName("log-workout-button");
-
-
-        topContainer.add(title, logWorkoutBtn,searchBtn, ringBtn, profileBtn);
+        TopBar topContainer = new TopBar("Log Workout");
 
         VerticalLayout workoutsContainer = new VerticalLayout();
         workoutsContainer.setId("workouts-container");
-
-        logWorkoutBtn.addClickListener(e -> {
-            UI.getCurrent().navigate("logWorkout");
-        });
 
         if (user.getWorkouts().isEmpty()) {
             Paragraph noWorkouts = new Paragraph("Click 'log workout' to add your first workout.");

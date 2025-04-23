@@ -7,6 +7,8 @@ import com.example.traininapp.ExercisePack.Exercise;
 import com.example.traininapp.ExercisePack.ExerciseService;
 import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.LeftNavigation;
+import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.Component;
@@ -54,18 +56,7 @@ public class LogWorkoutView extends Div {
        Div workoutDiv = new Div();
        workoutDiv.setId("workout-div");
 
-       VerticalLayout leftContainer = new VerticalLayout();
-       leftContainer.setId("left-container");
-       Image logo = new Image();
-       logo.setClassName("logo");
-
-       leftContainer.add(logo);
-       leftContainer.add(
-               new Anchor("plans","PLANS"),
-               new Anchor("main","MAIN"),
-               new Anchor("workouts","WORKOUTS"),
-               new Anchor("exercises","EXERCISES")
-       );
+       LeftNavigation leftContainer = new LeftNavigation();
 
        HorizontalLayout topContainer = new HorizontalLayout();
        topContainer.setId("top-container");

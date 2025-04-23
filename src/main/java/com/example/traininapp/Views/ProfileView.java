@@ -3,6 +3,8 @@ package com.example.traininapp.Views;
 
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.LeftNavigation;
+import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.UI;
@@ -36,39 +38,9 @@ public class ProfileView extends Div {
         Div profileDiv = new Div();
         profileDiv.setId("profile-div");
 
-        VerticalLayout leftContainer = new VerticalLayout();
-        leftContainer.setId("left-container");
-        Image logo = new Image();
-        logo.setClassName("logo");
-        leftContainer.add(logo);
-        leftContainer.add(
-                new Anchor("plans","PLANS"),
-                new Anchor("main","MAIN"),
-                new Anchor("workouts","WORKOUTS"),
-                new Anchor("exercises","EXERCISES")
-        );
+        LeftNavigation leftContainer = new LeftNavigation();
 
-        HorizontalLayout topContainer = new HorizontalLayout();
-        topContainer.setId("top-container");
-        H1 title = new H1("PROFILE");
-        title.setClassName("title");
-        Button logWorkout = new Button("log workout");
-
-        logWorkout.setClassName("log-workout-button");
-
-        Image searchIcon = new Image();
-        Button searchBtn = new Button(searchIcon);
-        searchBtn.setClassName("topBtn");
-
-        Image ringIcon = new Image();
-        Button ringBtn = new Button(ringIcon);
-        ringBtn.setClassName("topBtn");
-
-        Image profileIcon = new Image();
-        Button profileBtn = new Button(profileIcon);
-        profileBtn.setClassName("topBtn");
-
-        topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
+        TopBar topContainer = new TopBar("Log Workout");
 
         VerticalLayout centerContainer = new VerticalLayout();
         centerContainer.setId("center-container");
@@ -109,9 +81,6 @@ public class ProfileView extends Div {
             secondContainerWorkouts.add(workoutInfo);
         }
 
-        logWorkout.addClickListener(e -> {
-            UI.getCurrent().navigate("logWorkout");
-        });
 
         secondContainer.add(secondContainerTitle,secondContainerWorkouts);
         centerContainer.add(firstContainerInCenter,secondContainer);

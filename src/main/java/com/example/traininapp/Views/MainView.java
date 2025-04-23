@@ -5,6 +5,8 @@ import com.example.traininapp.ChallengePack.ChallengeService;
 import com.example.traininapp.DoneExPack.DoneExercise;
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.LeftNavigation;
+import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.UI;
@@ -73,41 +75,9 @@ public class MainView extends Div {
         Div mainContainer = new Div();
         mainContainer.setId("main-container");
 
-        VerticalLayout leftContainer = new VerticalLayout();
-        leftContainer.setId("left-container");
+        LeftNavigation leftContainer = new LeftNavigation();
 
-        Image logo = new Image();
-        logo.setClassName("logo");
-        leftContainer.add(logo);
-        leftContainer.add(
-            new Anchor("plans","PLANS"),
-            new Anchor("main","MAIN"),
-            new Anchor("workouts","WORKOUTS"),
-            new Anchor("exercises","EXERCISES")
-        );
-
-
-        HorizontalLayout topContainer = new HorizontalLayout();
-        topContainer.setId("top-container");
-
-        H1 title = new H1("PROFILE");
-        title.setClassName("title");
-        Button logWorkout = new Button("log workout");
-
-        logWorkout.setClassName("log-workout-button");
-        Image searchIcon = new Image();
-        Button searchBtn = new Button(searchIcon);
-        searchBtn.setClassName("topBtn");
-
-        Image ringIcon = new Image();
-        Button ringBtn = new Button(ringIcon);
-        ringBtn.setClassName("topBtn");
-
-        Image profileIcon = new Image();
-        Button profileBtn = new Button(profileIcon);
-        profileBtn.setClassName("topBtn");
-
-        topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
+        TopBar topContainer = new TopBar("Log Workout");
 
 
         VerticalLayout centerContainer = new VerticalLayout();
@@ -224,11 +194,6 @@ public class MainView extends Div {
         lastWorkoutDate.setText(workoutDate);
         lastWorkoutContainer.add(lastWorkoutTitle,lastWorkoutDate);
         thirdContainer.add(thirdContainerTitle,divider,lastWorkoutContainer);
-
-
-        logWorkout.addClickListener(e -> {
-            UI.getCurrent().navigate("logWorkout");
-        });
 
 
         secondContainerUpper.add(burntCalWidget,workTimeWidget);
