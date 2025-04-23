@@ -6,8 +6,14 @@ import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -19,6 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 @Route("/")
 public class RegisterView extends VerticalLayout {
@@ -48,32 +55,64 @@ public class RegisterView extends VerticalLayout {
 
         HorizontalLayout userNameSurnameLayout = new HorizontalLayout(name, surname);
         userNameSurnameLayout.setWidth("100%");
-        Text error = new Text("");
         Button registerButton = new Button("Register");
         Anchor anchor = new Anchor("login", "Already have an account?");
         registerButton.setClassName("register-button");
         registerButton.addClickListener(e -> {
-            try {
-                List<Workout> workoutList = new LinkedList<>();
-                User newUser = new User(
-                        workoutList,
-                        password.getValue(),
-                        email.getValue(),
-                        surname.getValue(),
-                        name.getValue());
-                userService.addUser(newUser);
-                UI.getCurrent().navigate("login");
-               // System.out.println(userService.getAllUsers());
-                VaadinSession session = VaadinSession.getCurrent();
-                session.setAttribute("email",null);
-            }
-            catch (Exception ex) {
-                error.setText(ex.getMessage());
-                throw new IllegalStateException(ex);
+            if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"") || Objects.equals(name.getValue(),"") || Objects.equals(surname.getValue(),"")){
+                Notification notification = new Notification();
+                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+                Div text = new Div(new Text("No empty fields are allowed!"));
+
+                Button closeButton = new Button(new Icon("lumo", "cross"));
+                closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                closeButton.setAriaLabel("Close");
+                closeButton.addClickListener(event -> {
+                    notification.close();
+                });
+                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                layout.setAlignItems(FlexComponent.Alignment.CENTER);
+                notification.add(layout);
+                notification.open();
+            }else {
+                try {
+                    List<Workout> workoutList = new LinkedList<>();
+                    User newUser = new User(
+                            workoutList,
+                            password.getValue(),
+                            email.getValue(),
+                            surname.getValue(),
+                            name.getValue());
+                    userService.addUser(newUser);
+                    UI.getCurrent().navigate("login");
+                    // System.out.println(userService.getAllUsers());
+                    VaadinSession session = VaadinSession.getCurrent();
+                    session.setAttribute("email", null);
+                } catch (Exception ex) {
+                    Notification notification = new Notification();
+                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+                    Div text = new Div(new Text(ex.getMessage()));
+
+                    Button closeButton = new Button(new Icon("lumo", "cross"));
+                    closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                    closeButton.setAriaLabel("Close");
+                    closeButton.addClickListener(event -> {
+                        notification.close();
+                    });
+
+                    HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                    layout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+                    notification.add(layout);
+                    notification.open();
+                    throw new IllegalStateException(ex);
+                }
             }
         });
 
-        formLayout.add(name, surname, email, password,error, registerButton,anchor);
+        formLayout.add(name, surname, email, password, registerButton,anchor);
         add(formLayout);
     }
 }

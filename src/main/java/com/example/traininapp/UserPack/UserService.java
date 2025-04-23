@@ -28,7 +28,7 @@ public class UserService {
         if (userOpt.isPresent()) {
             throw new IllegalStateException("User with email " + user.getEmail() + " already exists");
         } else if (!user.getPassword().matches(pattern)) {
-            throw new IllegalStateException("Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, no whitespace and be at least 8 characters");
+            throw new IllegalStateException("Your password must contain at least two digits, two lowercase letters, two uppercase letters, one special character, no whitespace and be at least 8 characters");
         }
         else {
             userRepo.save(user);
