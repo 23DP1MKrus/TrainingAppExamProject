@@ -4,6 +4,7 @@ import ch.qos.logback.core.util.COWArrayList;
 import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.PlanPack.Plans;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -86,6 +87,10 @@ public class PlansView extends Div {
         daysFilter.setItems("3", "4", "5", "All");
         daysFilter.setValue("All");
         daysFilter.setPlaceholder("Days count");
+
+        logWorkoutBtn.addClickListener(e -> {
+            UI.getCurrent().navigate("logWorkout");
+        });
 
         filtersContainer.add(filterTitle, difficultyFilter, daysFilter);
 

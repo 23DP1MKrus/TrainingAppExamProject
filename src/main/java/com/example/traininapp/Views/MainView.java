@@ -7,9 +7,8 @@ import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.charts.Chart;
-import com.vaadin.flow.component.charts.model.*;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -225,6 +224,12 @@ public class MainView extends Div {
         lastWorkoutDate.setText(workoutDate);
         lastWorkoutContainer.add(lastWorkoutTitle,lastWorkoutDate);
         thirdContainer.add(thirdContainerTitle,divider,lastWorkoutContainer);
+
+
+        logWorkout.addClickListener(e -> {
+            UI.getCurrent().navigate("logWorkout");
+        });
+
 
         secondContainerUpper.add(burntCalWidget,workTimeWidget);
         secondContainerLower.add(setsCountWidget,exCountWidget);

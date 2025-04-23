@@ -5,6 +5,7 @@ import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -70,6 +71,10 @@ public class WorkoutsView extends Div{
 
         VerticalLayout workoutsContainer = new VerticalLayout();
         workoutsContainer.setId("workouts-container");
+
+        logWorkoutBtn.addClickListener(e -> {
+            UI.getCurrent().navigate("logWorkout");
+        });
 
         if (user.getWorkouts().isEmpty()) {
             Paragraph noWorkouts = new Paragraph("Click 'log workout' to add your first workout.");

@@ -10,9 +10,15 @@ import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
+import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -26,6 +32,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Route("logWorkout")
 public class LogWorkoutView extends Div {
@@ -140,39 +147,122 @@ public class LogWorkoutView extends Div {
            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
            List<DoneExercise> addedDoneExList = new ArrayList<>();
+           String valueBpm = bpmField.getValue();
+           String valueDate = dateField.getValue();
+           String timeSpendFieldValue = timeSpendField.getValue();
+           String valueTitle = titleField.getValue();
+           String valuePlan = selectPlan.getValue();
+
             for (Component component : exerciseContainer.getChildren().toList()) {
                 List<Component> innerExComponentsList = component.getChildren().toList();
                 if (!innerExComponentsList.isEmpty()) {
                     Checkbox innerDoneExCheckbox = ((Checkbox) innerExComponentsList.get(4));
-                    if ((innerDoneExCheckbox.getValue().equals(true))) {
-                        DoneExercise doneExercise = new DoneExercise();
-                        doneExercise.setWeight(Integer.parseInt(((TextField) innerExComponentsList.get(1)).getValue()));
-                        doneExercise.setSets(Integer.parseInt(((TextField) innerExComponentsList.get(3)).getValue()));
-                        doneExercise.setReps(Integer.parseInt(((TextField) innerExComponentsList.get(2)).getValue()));
-                        doneExercise.setExercise(exerciseList.get(indexOf(component)+1));
-                        addedDoneExList.add(doneExercise);
+                    try{
+                            if ((innerDoneExCheckbox.getValue().equals(true))) {
+                                String weightValue = ((TextField) innerExComponentsList.get(1)).getValue();
+                                String setsValue = ((TextField) innerExComponentsList.get(3)).getValue();
+                                String repsValue = ((TextField) innerExComponentsList.get(2)).getValue();
+                                DoneExercise doneExercise = new DoneExercise();
+                                doneExercise.setWeight(Integer.parseInt(weightValue));
+                                doneExercise.setSets(Integer.parseInt(setsValue));
+                                doneExercise.setReps(Integer.parseInt(repsValue));
+                                doneExercise.setExercise(exerciseList.get(indexOf(component)+1));
+                                addedDoneExList.add(doneExercise);
+                            }
 
+                        } catch (Exception ex) {
+                            Notification notification = new Notification();
+                            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+                            Div text = new Div(new Text("Please input all fields in exercise!"));
+
+                            Button closeButton = new Button(new Icon("lumo", "cross"));
+                            closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                            closeButton.setAriaLabel("Close");
+                            closeButton.addClickListener(event -> {
+                                notification.close();
+                            });
+
+                            HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                            layout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+                            notification.add(layout);
+                            notification.open();
+                        }
+//                        if (Objects.equals(valueBpm, "") || Objects.equals(valueTitle, "") || Objects.equals(valuePlan, "") || Objects.equals(valueDate, "") || Objects.equals(timeSpendFieldValue, "")) {
+//
+//                        }
+//                        else if(Objects.equals(weightValue, "") || Objects.equals(setsValue, "") || Objects.equals(repsValue, "")){
+//
+//                        }
+//                        else{
+//
+//
+//
+//
+//                        }
                     }
                 }
-            }
 
-
-           Workout workout = new Workout(
-                   userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")),
-                   addedDoneExList,
-                   Integer.parseInt(bpmField.getValue()) * 4f,
-                   Integer.valueOf(bpmField.getValue()),
-                   LocalDate.parse(dateField.getValue(), dateFormatter),
-                   LocalTime.parse(timeSpendField.getValue(),timeFormatter),
-                   titleField.getValue(),
-                   planService.findByName(selectPlan.getValue())
+           try{
+               if (!addedDoneExList.isEmpty()) {
+                   Workout workout = new Workout(
+                           userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")),
+                           addedDoneExList,
+                           Integer.parseInt(valueBpm) * 4f,
+                           Integer.valueOf(valueBpm),
+                           LocalDate.parse(valueDate, dateFormatter),
+                           LocalTime.parse(timeSpendFieldValue,timeFormatter),
+                           valueTitle,
+                           planService.findByName(valuePlan)
                    );
-            workoutService.addWorkout(workout);
-            for(DoneExercise doneExercise : addedDoneExList){
-                doneExercise.setWorkout(workout);
-                doneExService.addDoneExercise(doneExercise);
-            }
-            userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")).getWorkouts().add(workout);
+                   workoutService.addWorkout(workout);
+                   for(DoneExercise doneEx: addedDoneExList){
+                       doneEx.setWorkout(workout);
+                       doneExService.addDoneExercise(doneEx);
+                   }
+                   userService.findByEmail(sessionEmail).orElseThrow(()->new IllegalArgumentException("User not found")).getWorkouts().add(workout);
+               }
+               else{
+                   Notification notification = new Notification();
+                   notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+                   Div text = new Div(new Text("Please add at least one exercise to your workout!"));
+
+                   Button closeButton = new Button(new Icon("lumo", "cross"));
+                   closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+                   closeButton.setAriaLabel("Close");
+                   closeButton.addClickListener(event -> {
+                       notification.close();
+                   });
+
+                   HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+                   layout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+                   notification.add(layout);
+                   notification.open();
+               }
+
+           } catch (Exception ex) {
+               Notification notification = new Notification();
+               notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
+
+               Div text = new Div(new Text("Please input all fields in workout!"));
+
+               Button closeButton = new Button(new Icon("lumo", "cross"));
+               closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
+               closeButton.setAriaLabel("Close");
+               closeButton.addClickListener(event -> {
+                   notification.close();
+               });
+
+               HorizontalLayout layout = new HorizontalLayout(text, closeButton);
+               layout.setAlignItems(FlexComponent.Alignment.CENTER);
+
+               notification.add(layout);
+               notification.open();
+           }
+
        });
        middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);
        workoutDiv.add(leftContainer, topContainer, middleContainer);

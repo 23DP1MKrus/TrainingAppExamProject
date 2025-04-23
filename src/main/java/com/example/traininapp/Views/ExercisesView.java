@@ -4,6 +4,7 @@ import com.example.traininapp.ExercisePack.Exercise;
 import com.example.traininapp.ExercisePack.ExerciseService;
 import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.PlanPack.PlansRepo;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -52,6 +53,10 @@ public class ExercisesView extends Div {
         Image profileIcon = new Image();
         Button profileBtn = new Button(profileIcon);
         profileBtn.setClassName("topBtn");
+
+        logWorkout.addClickListener(e -> {
+            UI.getCurrent().navigate("logWorkout");
+        });
 
         topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
 

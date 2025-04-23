@@ -5,6 +5,7 @@ import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -107,6 +108,11 @@ public class ProfileView extends Div {
             workoutInfo.add(workoutDate,timeSpentHolder,timeSpent,burntCalHolder,burntCals);
             secondContainerWorkouts.add(workoutInfo);
         }
+
+        logWorkout.addClickListener(e -> {
+            UI.getCurrent().navigate("logWorkout");
+        });
+
         secondContainer.add(secondContainerTitle,secondContainerWorkouts);
         centerContainer.add(firstContainerInCenter,secondContainer);
         profileDiv.add(leftContainer,topContainer,centerContainer);
