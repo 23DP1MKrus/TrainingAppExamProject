@@ -2,6 +2,7 @@ package com.example.traininapp.Views;
 
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.ErrorNotification;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
@@ -54,23 +55,7 @@ public class LoginView extends VerticalLayout {
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
             if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"")){
-                Notification notification = new Notification();
-                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-                Div text = new Div(new Text("Email or password is empty!"));
-
-                Button closeButton = new Button(new Icon("lumo", "cross"));
-                closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-                closeButton.setAriaLabel("Close");
-                closeButton.addClickListener(event -> {
-                    notification.close();
-                });
-
-                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                layout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-                notification.add(layout);
-                notification.open();
+                ErrorNotification errorNotification = new ErrorNotification("Empty fields are not allowed!");
             } else {
                 if (userService.canLogin(email.getValue(), password.getValue())) {
                     VaadinSession session = VaadinSession.getCurrent();

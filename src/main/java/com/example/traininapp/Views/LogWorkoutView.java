@@ -7,6 +7,7 @@ import com.example.traininapp.ExercisePack.Exercise;
 import com.example.traininapp.ExercisePack.ExerciseService;
 import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.ErrorNotification;
 import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
@@ -162,45 +163,13 @@ public class LogWorkoutView extends Div {
                             }
 
                         } catch (Exception ex) {
-                            Notification notification = new Notification();
-                            notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-                            Div text = new Div(new Text("Please input all fields in exercise!"));
-
-                            Button closeButton = new Button(new Icon("lumo", "cross"));
-                            closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-                            closeButton.setAriaLabel("Close");
-                            closeButton.addClickListener(event -> {
-                                notification.close();
-                            });
-
-                            HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                            layout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-                            notification.add(layout);
-                            notification.open();
+                        ErrorNotification errorNotification = new ErrorNotification("Please enter all fields in exercise!");
                         }
 
                     }
                 }
            if (addedDoneExList.isEmpty()) {
-               Notification notification = new Notification();
-               notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-               Div text = new Div(new Text("Please add at least one exercise to your workout!"));
-
-               Button closeButton = new Button(new Icon("lumo", "cross"));
-               closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-               closeButton.setAriaLabel("Close");
-               closeButton.addClickListener(event -> {
-                   notification.close();
-               });
-
-               HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-               layout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-               notification.add(layout);
-               notification.open();
+               ErrorNotification errorNotification = new ErrorNotification("Please add at least one exercise to your exercise list!");
            }else {
 
                try{
@@ -226,23 +195,7 @@ public class LogWorkoutView extends Div {
 
                }
                catch (Exception ex) {
-                   Notification notification = new Notification();
-                   notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-                   Div text = new Div(new Text("Please input all fields in workout!"));
-
-                   Button closeButton = new Button(new Icon("lumo", "cross"));
-                   closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-                   closeButton.setAriaLabel("Close");
-                   closeButton.addClickListener(event -> {
-                       notification.close();
-                   });
-
-                   HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                   layout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-                   notification.add(layout);
-                   notification.open();
+                   ErrorNotification errorNotification = new ErrorNotification("Please enter all fields in workout!");
                }
            }
 

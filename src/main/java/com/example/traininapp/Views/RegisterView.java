@@ -2,6 +2,7 @@ package com.example.traininapp.Views;
 
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
+import com.example.traininapp.Views.Components.ErrorNotification;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
@@ -60,21 +61,7 @@ public class RegisterView extends VerticalLayout {
         registerButton.setClassName("register-button");
         registerButton.addClickListener(e -> {
             if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"") || Objects.equals(name.getValue(),"") || Objects.equals(surname.getValue(),"")){
-                Notification notification = new Notification();
-                notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-                Div text = new Div(new Text("No empty fields are allowed!"));
-
-                Button closeButton = new Button(new Icon("lumo", "cross"));
-                closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-                closeButton.setAriaLabel("Close");
-                closeButton.addClickListener(event -> {
-                    notification.close();
-                });
-                HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                layout.setAlignItems(FlexComponent.Alignment.CENTER);
-                notification.add(layout);
-                notification.open();
+                ErrorNotification errorNotification = new ErrorNotification("No empty fields are allowed!");
             }else {
                 try {
                     List<Workout> workoutList = new LinkedList<>();
@@ -90,24 +77,7 @@ public class RegisterView extends VerticalLayout {
                     VaadinSession session = VaadinSession.getCurrent();
                     session.setAttribute("email", null);
                 } catch (Exception ex) {
-                    Notification notification = new Notification();
-                    notification.addThemeVariants(NotificationVariant.LUMO_ERROR);
-
-                    Div text = new Div(new Text(ex.getMessage()));
-
-                    Button closeButton = new Button(new Icon("lumo", "cross"));
-                    closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY_INLINE);
-                    closeButton.setAriaLabel("Close");
-                    closeButton.addClickListener(event -> {
-                        notification.close();
-                    });
-
-                    HorizontalLayout layout = new HorizontalLayout(text, closeButton);
-                    layout.setAlignItems(FlexComponent.Alignment.CENTER);
-
-                    notification.add(layout);
-                    notification.open();
-                    throw new IllegalStateException(ex);
+                    ErrorNotification errorNotification = new ErrorNotification(ex.getMessage());
                 }
             }
         });
