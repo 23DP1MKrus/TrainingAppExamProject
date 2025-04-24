@@ -9,19 +9,16 @@ import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.Views.Components.ErrorNotification;
 import com.example.traininapp.Views.Components.LeftNavigation;
-import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.checkbox.Checkbox;
-import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.icon.Icon;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
@@ -35,7 +32,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Route("logWorkout")
 public class LogWorkoutView extends Div {

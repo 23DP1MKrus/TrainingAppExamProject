@@ -1,15 +1,14 @@
 package com.example.traininapp.Views;
 
-import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.UserPack.User;
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.html.Anchor;
+import com.vaadin.flow.component.html.Div;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;

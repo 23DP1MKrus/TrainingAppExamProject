@@ -1,19 +1,14 @@
 package com.example.traininapp.Views;
 
-import ch.qos.logback.core.util.COWArrayList;
 import com.example.traininapp.PlanPack.PlanService;
 import com.example.traininapp.PlanPack.Plans;
 import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.Views.Components.TopBar;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.vaadin.flow.component.UI;
-import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.select.Select;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.spring.SpringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
