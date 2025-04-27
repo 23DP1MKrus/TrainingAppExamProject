@@ -5,6 +5,7 @@ import com.example.traininapp.Views.Components.ErrorNotification;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -16,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
-
+@CssImport("./styles/style.css")
 @Route("login")
 public class LoginView extends VerticalLayout {
     private final UserService userService;

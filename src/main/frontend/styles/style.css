@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+.register-view{
+    font-family: "Raleway", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.register-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+}
+.register-title{
+    color: #9758E4;
+    font-size: 2vw;
+    font-weight: bolder;
+}
+.anchor-color{
+    color: rgba(151, 88, 228, 0.62);
+}
+vaadin-text-field{
+    width: 20%;
+    height: 7.5%;
+}
+vaadin-email-field{
+    width: 20%;
+    height: 7.5%;
+}
+vaadin-password-field{
+    width: 20%;
+    height: 7.5%;
+}
+
+vaadin-text-field::part(input-field) {
+    border: 1px solid #9758E4;
+    border-radius: 0.5vw;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    color: #9758E4;
+}
+vaadin-email-field::part(input-field) {
+    border: 1px solid #9758E4;
+    border-radius: 0.5vw;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    color: #9758E4;
+}
+vaadin-password-field::part(input-field) {
+    border: 1px solid #9758E4;
+    border-radius: 0.5vw;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    color: #9758E4;
+}
+vaadin-password-field > input:placeholder-shown{
+    color: rgba(151, 88, 228, 0.62);
+}
+vaadin-email-field > input:placeholder-shown{
+    color: rgba(151, 88, 228, 0.62);
+}
+vaadin-text-field > input:placeholder-shown{
+    color: rgba(151, 88, 228, 0.62);
+}
+
+.register-button{
+    width: 20%;
+    height: 7.5%;
+    border-radius: 0.5vw;
+    background-color: #9758E4;
+    color: white;
+}

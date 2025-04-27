@@ -6,8 +6,10 @@ import com.example.traininapp.Views.Components.ErrorNotification;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
@@ -21,6 +23,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 
+@CssImport("./styles/style.css")
 @Route("/")
 public class RegisterView extends VerticalLayout {
     private final UserService userService;
@@ -37,10 +40,14 @@ public class RegisterView extends VerticalLayout {
         H1 title = new H1("REGISTER");
         title.setClassName("register-title");
 
-        TextField name = new TextField("name");
-        TextField surname = new TextField("surname");
-        EmailField email = new EmailField("email");
-        PasswordField password = new PasswordField("password");
+        TextField name = new TextField();
+        name.setPlaceholder("Name");
+        TextField surname = new TextField();
+        surname.setPlaceholder("Surname");
+        EmailField email = new EmailField();
+        email.setPlaceholder("Email");
+        PasswordField password = new PasswordField();
+        password.setPlaceholder("Password");
 
         name.setClassName("input-name");
         surname.setClassName("input-surname");
@@ -51,6 +58,7 @@ public class RegisterView extends VerticalLayout {
         userNameSurnameLayout.setWidth("100%");
         Button registerButton = new Button("Register");
         Anchor anchor = new Anchor("login", "Already have an account?");
+        anchor.setClassName("anchor-color");
         registerButton.setClassName("register-button");
         registerButton.addClickListener(e -> {
             if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"") || Objects.equals(name.getValue(),"") || Objects.equals(surname.getValue(),"")){
@@ -74,8 +82,10 @@ public class RegisterView extends VerticalLayout {
                 }
             }
         });
+        Image logo = new Image("images/logo.png", "Logo");
 
-        formLayout.add(name, surname, email, password, registerButton,anchor);
+
+        formLayout.add(title,name, surname, email, password, registerButton,anchor, logo);
         add(formLayout);
     }
 }
