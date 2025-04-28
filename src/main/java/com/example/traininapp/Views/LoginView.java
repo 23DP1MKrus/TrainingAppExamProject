@@ -1,4 +1,4 @@
-package com.example.traininapp.Views;
+ package com.example.traininapp.Views;
 
 import com.example.traininapp.UserPack.UserService;
 import com.example.traininapp.Views.Components.ErrorNotification;
@@ -8,6 +8,7 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.H1;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -34,8 +35,10 @@ public class LoginView extends VerticalLayout {
         H1 title = new H1("LOGIN");
         title.setClassName("login-title");
 
-        EmailField email = new EmailField("email");
-        PasswordField password = new PasswordField("password");
+        EmailField email = new EmailField();
+        email.setPlaceholder("email");
+        PasswordField password = new PasswordField();
+        password.setPlaceholder("password");
 
         email.setClassName("input-email");
         password.setClassName("input-password");
@@ -43,6 +46,7 @@ public class LoginView extends VerticalLayout {
         Text error = new Text("");
         Button loginButton = new Button("Log in");
         Anchor anchor = new Anchor("register", "Don't have an account yet?");
+        Image logo = new Image("images/logo.png", "Logo");
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
             if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"")){
@@ -58,7 +62,7 @@ public class LoginView extends VerticalLayout {
             }
         });
 
-        formLayout.add(email, password,error, loginButton,anchor);
+        formLayout.add(title,email, password,error, loginButton,anchor,logo);
         add(formLayout);
     }
     }

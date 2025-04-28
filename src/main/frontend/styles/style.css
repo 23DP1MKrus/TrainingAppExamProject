@@ -19,20 +19,17 @@
     font-size: 2vw;
     font-weight: bolder;
 }
-.anchor-color{
-    color: rgba(151, 88, 228, 0.62);
-}
 vaadin-text-field{
     width: 20%;
-    height: 7.5%;
+    height: 5%;
 }
 vaadin-email-field{
     width: 20%;
-    height: 7.5%;
+    height: 5%;
 }
 vaadin-password-field{
     width: 20%;
-    height: 7.5%;
+    height: 5%;
 }
 
 vaadin-text-field::part(input-field) {
@@ -71,8 +68,42 @@ vaadin-text-field > input:placeholder-shown{
 
 .register-button{
     width: 20%;
-    height: 7.5%;
+    height: 5%;
     border-radius: 0.5vw;
     background-color: #9758E4;
     color: white;
 }
+.login-view{
+    font-family: "Raleway", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.login-form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.login-title{
+    color: #9758E4;
+    font-size: 2vw;
+    font-weight: bolder;
+}
+.login-button{
+    width: 20%;
+    height: 5%;
+    border-radius: 0.5vw;
+    background-color: #9758E4;
+    color: white;
+}
+.login-view a{
+    text-decoration: none;
+    color: #9758E4;
+}
+.register-view a{
+    text-decoration: none;
+    color: #9758E4;
+}
+
