@@ -7,7 +7,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 public class LeftNavigation extends VerticalLayout {
     public LeftNavigation() {
         setId("left-navigation");
-        Image logo = new Image();
+        Image logo = new Image("images/logo.png", "Logo");
         logo.setClassName("logo");
         add(
                 logo,

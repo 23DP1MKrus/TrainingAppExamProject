@@ -106,4 +106,29 @@ vaadin-text-field > input:placeholder-shown{
     text-decoration: none;
     color: #9758E4;
 }
+#main{
+    background-color: red;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#main-container{
+    background-color: blue;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+#left-navigation.style{
+    width: 0;
+}
+#left-navigation{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    background-color: #161616;
+}
+
 

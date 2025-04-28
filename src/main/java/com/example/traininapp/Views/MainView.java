@@ -9,6 +9,7 @@ import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+@CssImport("./styles/style.css")
 @Route("main")
 public class MainView extends Div {
     private WorkoutService workoutService;
@@ -201,9 +203,9 @@ public class MainView extends Div {
         centerContainerUpperPart.add(secondContainer,firstContainerInCenter);
         centerContainerLowerPart.add(thirdContainer);
 
-        centerContainer.add(centerContainerUpperPart,centerContainerLowerPart);
+        centerContainer.add(topContainer,centerContainerUpperPart,centerContainerLowerPart);
 
-        mainContainer.add(leftContainer,topContainer,centerContainer);
+        mainContainer.add(leftContainer,centerContainer);
         add(mainContainer);
 
     }
