@@ -71,9 +71,6 @@ public class MainView extends Div {
 
         setId("main");
 
-        Div mainContainer = new Div();
-        mainContainer.setId("main-container");
-
         LeftNavigation leftContainer = new LeftNavigation();
 
         TopBar topContainer = new TopBar("Log Workout");
@@ -95,7 +92,7 @@ public class MainView extends Div {
         challengeContainer.setId("challenge-container");
         HorizontalLayout challengeContainerTitle = new HorizontalLayout();
         challengeContainerTitle.setId("challenge-container-title");
-        Image challengeIcon = new Image();
+        Image challengeIcon = new Image("images/daily-icon.png", "Daily");
         H1 challengeTitle = new H1("DAILY CHALLENGES");
         challengeContainerTitle.add(challengeIcon,challengeTitle);
         VerticalLayout challenges = new VerticalLayout();
@@ -112,10 +109,13 @@ public class MainView extends Div {
 
 
         for (Challenge challenge : randomChallenges) {
+            Image tickImg = new Image("images/tick-icon.png", "Tick");
             Paragraph paragraph = new Paragraph();
-            paragraph.setClassName("ChallengeParagraph");
+            VerticalLayout challengeContent = new VerticalLayout();
             paragraph.setText(challenge.getContent());
-            challenges.add(paragraph);
+            challengeContent.setId("challenge-content");
+            challengeContent.add(tickImg,paragraph);
+            challenges.add(challengeContent);
         }
 
         challengeContainer.add(challengeContainerTitle, challenges);
@@ -125,13 +125,15 @@ public class MainView extends Div {
         secondContainer.setId("second-container");
 
         HorizontalLayout secondContainerUpper = new HorizontalLayout();
+        secondContainerUpper.setClassName("second-container-part");
         HorizontalLayout secondContainerLower = new HorizontalLayout();
+        secondContainerLower.setClassName("second-container-part");
 
         VerticalLayout burntCalWidget = new VerticalLayout();
         burntCalWidget.setClassName("main-container-widget");
         HorizontalLayout burntCalWidgetTitle = new HorizontalLayout();
         burntCalWidgetTitle.setClassName("main-container-widget-title");
-        Image burntCalIcon = new Image();
+        Image burntCalIcon = new Image("images/kcal-icon.png", "Time");
         H1 burntCalTitle = new H1("CALORIES BURNT");
         burntCalWidgetTitle.add(burntCalIcon,burntCalTitle);
         Paragraph burntCals= new Paragraph();
@@ -143,7 +145,7 @@ public class MainView extends Div {
         workTimeWidget.setClassName("main-container-widget");
         HorizontalLayout workTimeWidgetTitle = new HorizontalLayout();
         workTimeWidgetTitle.setClassName("main-container-widget-title");
-        Image workTimeImage = new Image();
+        Image workTimeImage = new Image("images/clock-icon.png", "Time");
         H1 workTimeTitle = new H1("WORKOUT TIME");
         workTimeWidgetTitle.add(workTimeImage,workTimeTitle);
         Paragraph workoutTime = new Paragraph();
@@ -155,7 +157,7 @@ public class MainView extends Div {
         setsCountWidget.setClassName("main-container-widget");
         HorizontalLayout setsCountWidgetTitle = new HorizontalLayout();
         setsCountWidgetTitle.setClassName("main-container-widget-title");
-        Image setsCountWidgetImage = new Image();
+        Image setsCountWidgetImage = new Image("images/sets-icon.png", "Sets");
         H1 setsCountTitle = new H1("SETS COUNT");
         setsCountWidgetTitle.add(setsCountWidgetImage,setsCountTitle);
         Paragraph setsCount= new Paragraph();
@@ -167,7 +169,7 @@ public class MainView extends Div {
         exCountWidget.setClassName("main-container-widget");
         HorizontalLayout exCountWidgetTitle = new HorizontalLayout();
         exCountWidgetTitle.setClassName("main-container-widget-title");
-        Image exCountWidgetImage = new Image();
+        Image exCountWidgetImage = new Image("images/ex-count-icon.png", "Ex-count");
         H1 exCountTitle = new H1("EXERCISE COUNT");
         exCountWidgetTitle.add(exCountWidgetImage,exCountTitle);
         Paragraph exsCount = new Paragraph();
@@ -205,8 +207,7 @@ public class MainView extends Div {
 
         centerContainer.add(topContainer,centerContainerUpperPart,centerContainerLowerPart);
 
-        mainContainer.add(leftContainer,centerContainer);
-        add(mainContainer);
+        add(leftContainer,centerContainer);
 
     }
     private HorizontalLayout createNavLink(String text, String route) {
