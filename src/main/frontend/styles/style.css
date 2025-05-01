@@ -109,7 +109,7 @@ vaadin-text-field > input:placeholder-shown{
 #main{
     height: 100%;
     display: flex;
-    background-color: blue;
+    /*background-color: blue;*/
     justify-content: start;
     gap: 5%;
     align-items: start;
@@ -146,14 +146,14 @@ vaadin-text-field > input:placeholder-shown{
     justify-content: space-between;
     width: 75% !important;
     height: 77% !important;
-    background-color: yellow;
+    /*background-color: yellow;*/
     padding: 0;
 }
 #top-bar{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: green;
+    /*background-color: green;*/
     width: 100%;
     height: 10%;
     color: white;
@@ -189,12 +189,12 @@ vaadin-text-field > input:placeholder-shown{
     width: 0.6vw;
 }
 #center-upper-part{
-    background-color: cyan;
+    /*background-color: cyan;*/
     width: 100%;
     height: 70%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
     /* gap: 20%; */
     flex-direction: row;
 }
@@ -322,4 +322,44 @@ vaadin-text-field > input:placeholder-shown{
 #last-workout-date{
     color: white;
     font-size: 0.7vw;
+}
+#workoutsDiv{
+    display: flex;
+    flex-direction: row;
+}
+#workouts-container{
+    width: 100%;
+
+}
+.workout-field{
+    align-items: center;
+    height: 10%;
+    width: 85%;
+    border-radius: 2vh;
+    background-color: #161616;
+    display: flex;
+    flex-direction: row;
+    color: white;
+}
+.workout-time-spent{
+    text-align: center;
+    background-color: rgba(151, 88, 228, 0.51);
+    height: 50%;
+    width: 15%;
+    border-radius: 1vh;
+    border: 2px solid #A667F3;
+}
+.workout-burnt-cals{
+    background-color: rgba(151, 88, 228, 0.51);
+    height: 50%;
+    width: 15%;
+    border-radius: 1vh;
+    border: 2px solid #A667F3;
+    text-align: center;
+}
+.workout-date{
+    margin-left: 5%;
+}
+.workout-time-spent-holder{
+    margin-left: 15%;
 }
