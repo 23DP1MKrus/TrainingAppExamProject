@@ -98,9 +98,9 @@ public class LogWorkoutView extends Div {
        titleField.setId("title-field");
        TextField bpmField = new TextField("avg bpm");
        bpmField.setId("bpm-field");
-       TextField timeSpendField = new TextField("time spend");
+       TextField timeSpendField = new TextField("time spend(01:50)");
        timeSpendField.setId("time-spend-field");
-       TextField dateField = new TextField("date(2025-04-09)");
+       TextField dateField = new TextField("date(2025-04-31)");
        dateField.setId("date-field");
        formContainer.add(titleField, bpmField, timeSpendField, dateField);
 

@@ -157,6 +157,8 @@ vaadin-text-field > input:placeholder-shown{
     width: 100%;
     height: 10%;
     color: white;
+    margin-bottom: 4%;
+    margin-top: 1%;
 }
 #top-bar h1{
     color: white;
@@ -170,6 +172,7 @@ vaadin-text-field > input:placeholder-shown{
     width: 35% !important;
 }
 .log-workout-button{
+    font-size: 2vw;
     width: 35%;
     height: 4vh;
     border-radius: 1vw;
@@ -186,7 +189,7 @@ vaadin-text-field > input:placeholder-shown{
     justify-content: center;
 }
 .topBtn img{
-    width: 0.6vw;
+    width: 1vw;
 }
 #center-upper-part{
     /*background-color: cyan;*/
@@ -205,6 +208,7 @@ vaadin-text-field > input:placeholder-shown{
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    padding: 0;
 }
 .main-container-widget {
     background-color: #161616;
@@ -264,7 +268,7 @@ vaadin-text-field > input:placeholder-shown{
     align-items: start;
     justify-content: center;
     flex-direction: column;
-    font-size: 0.55vw;
+    font-size: 1vw;
 }
 #challenge-content {
     width: 80% !important;
@@ -323,10 +327,16 @@ vaadin-text-field > input:placeholder-shown{
     color: white;
     font-size: 0.7vw;
 }
-#workoutsDiv{
+
+
+#workouts-div {
+    height: 100%;
     display: flex;
-    flex-direction: row;
+    justify-content: start;
+    gap: 5%;
+    align-items: start;
 }
+
 #workouts-container{
     width: 100%;
 
