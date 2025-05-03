@@ -58,6 +58,9 @@ public class LogWorkoutView extends Div {
        HorizontalLayout topContainer = new HorizontalLayout();
        topContainer.setId("top-container");
 
+       HorizontalLayout rightContainer = new HorizontalLayout();
+       rightContainer.setId("right-container");
+
        H1 title = new H1("LOG YOUR RECENT WORKOUT");
        title.setClassName("title");
        Button logWorkout = new Button("log workout");
@@ -198,6 +201,7 @@ public class LogWorkoutView extends Div {
 
 
        });
+       rightContainer.add(topContainer, middleContainer);
        middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);
        workoutDiv.add(leftContainer, topContainer, middleContainer);
        add(workoutDiv);

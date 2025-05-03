@@ -33,6 +33,11 @@ public class TopBar extends HorizontalLayout {
         logWorkout.addClickListener(e -> {
             UI.getCurrent().navigate("logWorkout");
         });
+
+        profileBtn.addClickListener(e -> {
+            UI.getCurrent().navigate("profile");
+        });
+
         add(title,buttons);
     }
 }

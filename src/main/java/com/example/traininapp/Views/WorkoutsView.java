@@ -37,7 +37,7 @@ public class WorkoutsView extends Div{
 
         LeftNavigation leftContainer = new LeftNavigation();
 
-        TopBar topContainer = new TopBar("Log Workout");
+        TopBar topContainer = new TopBar("View your recent workouts");
 
         VerticalLayout workoutsContainer = new VerticalLayout();
         workoutsContainer.setId("workouts-container");
