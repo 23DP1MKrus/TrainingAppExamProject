@@ -345,7 +345,11 @@ vaadin-text-field > input:placeholder-shown{
 
 #workouts-container{
     width: 100%;
+    overflow-y: scroll;
 
+}
+#workouts-container::-webkit-scrollbar {
+    display: none;
 }
 .workout-field{
     align-items: center;
@@ -382,17 +386,30 @@ vaadin-text-field > input:placeholder-shown{
 
 /*log workout*/
 
-#workout-div{
-    height: 100%;
-    display: flex;
-    justify-content: start;
-    gap: 5%;
-    align-items: start;
-}
+/*#workout-div{*/
+/*    height: 100%;*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-content: start;*/
+/*    gap: 5%;*/
+/*    align-items: start;*/
+/*}*/
 #rightContainer{
     display: flex;
     flex-direction: column;
 }
+#layout-wrapper-workouts {
+    display: flex;
+    height: 100vh;
+
+}
+
+#right-section-workouts {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 
 /*profile*/
 
