@@ -397,17 +397,7 @@ vaadin-text-field > input:placeholder-shown{
     display: flex;
     flex-direction: column;
 }
-#layout-wrapper-workouts {
-    display: flex;
-    height: 100vh;
 
-}
-
-#right-section-workouts {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
 
 
 /*profile*/
@@ -498,15 +488,6 @@ vaadin-text-field > input:placeholder-shown{
     margin-right: 5%;
     margin-top: 2%;
 }
-#middle-container{
-    width: 100% !important;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    overflow-y: scroll;
-}
 #middle-container::-webkit-scrollbar {
     display: none;
 }
@@ -538,4 +519,61 @@ vaadin-text-field > input:placeholder-shown{
     color: #9758E4;
     font-size: 1.5vw;
 }
+#top-container-workout{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100% !important;
 
+}
+#top-container-right{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 7%;
+    width: 35% !important;
+
+}
+#log-workout{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    align-items: start;
+}
+#right-section-workouts {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+#middle-container{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 95% !important;
+    height: 80% !important;
+    margin-right: 5%;
+    margin-top: 3%;
+}
+.choose-plan-title{
+    color: #161616;
+}
+#exercise-container-logworkout{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    overflow-y: scroll;
+    height: 20vh !important;
+}
+.exercise-div{
+    background-color: #161616;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+}
