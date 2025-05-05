@@ -32,8 +32,7 @@ public class WorkoutsView extends Div{
         String sessionEmail = session.getAttribute("email").toString();
         User user = userService.findByEmail(sessionEmail).orElseThrow(() -> new IllegalStateException("User not found"));
 
-        Div workoutsDiv = new Div();
-        workoutsDiv.setId("workouts-div");
+        setId("workouts-div");
 
         LeftNavigation leftContainer = new LeftNavigation();
 
@@ -68,8 +67,7 @@ public class WorkoutsView extends Div{
                 workoutsContainer.add(workoutsField);
             }
         }
-        workoutsDiv.add(leftContainer, workoutsContainer);
-        add(workoutsDiv);
+        add(leftContainer, workoutsContainer);
     }
 
 
