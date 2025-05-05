@@ -22,11 +22,9 @@ public class ExercisesView extends Div {
         this.exerciseService = exerciseService;
         setId("exercises-view");
 
-        Div workoutDiv = new Div();
-        workoutDiv.setId("exercise-main-div");
-
         LeftNavigation leftContainer = new LeftNavigation();
-
+        VerticalLayout rightContainer = new VerticalLayout();
+        rightContainer.setId("ex-right-container");
         TopBar topContainer = new TopBar("Exercises");
 
         VerticalLayout middleContainer = new VerticalLayout();
@@ -47,6 +45,7 @@ public class ExercisesView extends Div {
             exerciseContainer.add(line,exTextContainer,exerciseImage);
             middleContainer.add(exerciseContainer);
         }
-    add(leftContainer,topContainer,middleContainer);
+        rightContainer.add(topContainer,middleContainer);
+    add(leftContainer,rightContainer);
     }
 }

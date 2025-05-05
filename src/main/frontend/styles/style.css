@@ -115,11 +115,11 @@ vaadin-text-field > input:placeholder-shown{
     align-items: start;
 }
 #left-navigation img{
+    width: 20%;
     margin-top: 5%;
     margin-bottom: 40%;
 }
 #left-navigation{
-    margin-top: 2%;
     display: flex;
     justify-content: start;
     gap: 7%;
@@ -130,13 +130,15 @@ vaadin-text-field > input:placeholder-shown{
     background-color: #161616;
     aspect-ratio: 9 / 27;
     border-radius: 1vw;
-    margin-left: 2%;
+    margin-left: 3%;
+    margin-top: 3%;
 }
 #left-navigation a{
     width: 65% !important;
     color: white;
     text-decoration: none;
     text-align: left;
+    font-size: 0.6vw;
 }
 #center-container {
     margin-top: 3%;
@@ -153,12 +155,12 @@ vaadin-text-field > input:placeholder-shown{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: green;
     width: 100%;
     height: 10%;
     color: white;
 }
 #top-bar h1{
+    font-size: 2vw;
     color: white;
     margin-left: 2%;
 }
@@ -322,4 +324,63 @@ vaadin-text-field > input:placeholder-shown{
 #last-workout-date{
     color: white;
     font-size: 0.7vw;
+}
+
+/*ExersiceView*/
+#exercises-view{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    align-items: start;
+}
+#ex-right-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 80% !important;
+    height: 96% !important;
+    margin-right: 5%;
+    margin-top: 2%;
+}
+#middle-container{
+    width: 100% !important;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    overflow-y: scroll;
+}
+#middle-container::-webkit-scrollbar {
+    display: none;
+}
+#exercise-container{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    background-color: #161616;
+    width: 80%;
+    height: 20vh !important;
+    color: white;
+    padding: 2vw;
+    border-radius: 1vw;
+}
+#exercise-container p{
+    width: 50%;
+}
+.exercise-image{
+    width: 40%;
+    height: 130%;
+    border-radius: 1vw;
+}
+.line{
+    height: 100%;
+    width: 0.3%;
+    background-color: #9758E4;
+}
+.exercise-name{
+    color: white;
+    font-size: 1.5vw;
 }

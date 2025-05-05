@@ -167,7 +167,7 @@ public class ExerciseConfig {
 
             Exercise exercise23 = new Exercise(
                     new ArrayList<>(),
-                    "images/Hollow_Body_Hold.png",
+                    "images/Hollow Body Hold.png",
                     "Lie on your back, lift your legs and shoulders off the ground, and hold the position while keeping your lower back flat on the floor.",
                     "Hollow Body Hold"
             );
@@ -279,7 +279,7 @@ public class ExerciseConfig {
 
             Exercise exercise39 = new Exercise(
                     new ArrayList<>(),
-                    "/META-INF/resources/imagesLeg_Press.png",
+                    "images/Leg_Press.png",
                     "Sit on a leg press machine, place your feet shoulder-width apart, and push the platform away from you.",
                     "Leg Press"
             );
