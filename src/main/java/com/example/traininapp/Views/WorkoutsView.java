@@ -6,6 +6,7 @@ import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Paragraph;
@@ -15,6 +16,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@CssImport("./styles/style.css")
 @Route("workouts")
 public class WorkoutsView extends Div{
     private UserService userService;
@@ -35,10 +37,12 @@ public class WorkoutsView extends Div{
 
         LeftNavigation leftContainer = new LeftNavigation();
 
-        TopBar topContainer = new TopBar("Log Workout");
+        TopBar topContainer = new TopBar("View your recent workouts");
 
         VerticalLayout workoutsContainer = new VerticalLayout();
         workoutsContainer.setId("workouts-container");
+
+        workoutsContainer.add(topContainer);
 
         if (user.getWorkouts().isEmpty()) {
             Paragraph noWorkouts = new Paragraph("Click 'log workout' to add your first workout.");
@@ -49,20 +53,22 @@ public class WorkoutsView extends Div{
                 workoutsField.setClassName("workout-field");
                 Paragraph workoutDate = new Paragraph(String.valueOf(workout.getDate()));
                 workoutDate.setClassName("workout-date");
+
                 Paragraph timeSpentHolder = new Paragraph("time-spent:");
                 timeSpentHolder.setClassName("workout-time-spent-holder");
                 Paragraph timeSpent = new Paragraph(String.valueOf(workout.getTimeSpent()));
                 timeSpent.setClassName("workout-time-spent");
+
                 Paragraph burntCalHolder = new Paragraph("burnt-cals:");
                 burntCalHolder.setClassName("workout-burnt-cal-holder");
                 Paragraph burntCals = new Paragraph(String.valueOf(workout.getBurntKcal()));
                 burntCals.setClassName("workout-burnt-cals");
+
                 workoutsField.add(workoutDate, timeSpentHolder, timeSpent, burntCalHolder, burntCals);
                 workoutsContainer.add(workoutsField);
             }
         }
-
-        workoutsDiv.add(leftContainer, topContainer, workoutsContainer);
+        workoutsDiv.add(leftContainer, workoutsContainer);
         add(workoutsDiv);
     }
 

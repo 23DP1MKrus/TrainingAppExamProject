@@ -2,11 +2,13 @@ package com.example.traininapp.Views.Components;
 
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
+@CssImport("./styles/style.css")
 public class TopBar extends HorizontalLayout {
     public TopBar(String titleText) {
         setId("top-bar");
@@ -31,6 +33,11 @@ public class TopBar extends HorizontalLayout {
         logWorkout.addClickListener(e -> {
             UI.getCurrent().navigate("logWorkout");
         });
+
+        profileBtn.addClickListener(e -> {
+            UI.getCurrent().navigate("profile");
+        });
+
         add(title,buttons);
     }
 }

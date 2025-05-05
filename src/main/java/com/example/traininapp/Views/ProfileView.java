@@ -7,6 +7,7 @@ import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.Views.Components.TopBar;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
+import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.html.Paragraph;
@@ -16,6 +17,7 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.server.VaadinSession;
 import org.springframework.beans.factory.annotation.Autowired;
 
+@CssImport("./styles/style.css")
 @Route("profile")
 public class ProfileView extends Div {
     private UserService userService;
@@ -40,15 +42,15 @@ public class ProfileView extends Div {
 
         LeftNavigation leftContainer = new LeftNavigation();
 
-        TopBar topContainer = new TopBar("Log Workout");
+        TopBar topContainer = new TopBar("your profile");
 
         VerticalLayout centerContainer = new VerticalLayout();
-        centerContainer.setId("center-container");
+        centerContainer.setId("center-container-profile");
         HorizontalLayout firstContainerInCenter = new HorizontalLayout();
         firstContainerInCenter.setId("first-container");
         Image profileImage = new Image();
-        profileImage.setClassName("profile-image");
-        profileImage.setSrc("profile-image.png");
+        profileImage.setId("profile-pic");
+        profileImage.setSrc("images/profilePic.png");
         VerticalLayout userInfo = new VerticalLayout();
         userInfo.setId("user-info");
         Paragraph userIdParagraph = new Paragraph("id:"+userId);
@@ -61,8 +63,9 @@ public class ProfileView extends Div {
         firstContainerInCenter.add(profileImage,userInfo);
 
         VerticalLayout secondContainer = new VerticalLayout();
-        secondContainer.setId("second-container");
+        secondContainer.setId("second-container-profile");
         Paragraph secondContainerTitle = new Paragraph("Your recent workouts:");
+        secondContainerTitle.setClassName("second-container-title");
         VerticalLayout secondContainerWorkouts = new VerticalLayout();
         for(Workout workout :user.getWorkouts()){
             HorizontalLayout workoutInfo = new HorizontalLayout();
@@ -84,7 +87,31 @@ public class ProfileView extends Div {
 
         secondContainer.add(secondContainerTitle,secondContainerWorkouts);
         centerContainer.add(firstContainerInCenter,secondContainer);
-        profileDiv.add(leftContainer,topContainer,centerContainer);
+//        profileDiv.add(leftContainer,topContainer,centerContainer);
+//        add(profileDiv);
+
+        // Create a wrapper that holds left nav and the rest of the content
+        HorizontalLayout layoutWrapper = new HorizontalLayout();
+        layoutWrapper.setId("layout-wrapper");
+        layoutWrapper.setSizeFull();
+        layoutWrapper.setSpacing(false);
+        layoutWrapper.setPadding(false);
+
+        // Vertical layout to hold top bar and profile center content
+        VerticalLayout rightSection = new VerticalLayout();
+        rightSection.setId("right-section");
+        rightSection.setSpacing(false);
+        rightSection.setPadding(false);
+        rightSection.setSizeFull();
+
+        rightSection.add(topContainer, centerContainer);
+        layoutWrapper.add(leftContainer, rightSection);
+
+        // Add layoutWrapper to the profileDiv, and profileDiv to the view
+        profileDiv.add(layoutWrapper);
         add(profileDiv);
+
+
+
     }
 }

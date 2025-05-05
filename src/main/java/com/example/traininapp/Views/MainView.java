@@ -73,7 +73,7 @@ public class MainView extends Div {
 
         LeftNavigation leftContainer = new LeftNavigation();
 
-        TopBar topContainer = new TopBar("Log Workout");
+        TopBar topContainer = new TopBar("");
 
 
         VerticalLayout centerContainer = new VerticalLayout();

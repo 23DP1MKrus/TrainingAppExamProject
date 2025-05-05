@@ -12,6 +12,7 @@ import com.example.traininapp.Views.Components.LeftNavigation;
 import com.example.traininapp.WorkoutPack.Workout;
 import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.Component;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.Div;
@@ -56,7 +57,12 @@ public class LogWorkoutView extends Div {
        LeftNavigation leftContainer = new LeftNavigation();
 
        HorizontalLayout topContainer = new HorizontalLayout();
-       topContainer.setId("top-container");
+       topContainer.setId("top-container-workout");
+
+
+       VerticalLayout middleContainer = new VerticalLayout();
+       middleContainer.setId("middle-container");
+
 
        H1 title = new H1("LOG YOUR RECENT WORKOUT");
        title.setClassName("title");
@@ -64,22 +70,23 @@ public class LogWorkoutView extends Div {
 
        logWorkout.setClassName("log-workout-button");
 
-       Image searchIcon = new Image();
+       Image searchIcon = new Image("images/search.png", "Search");
        Button searchBtn = new Button(searchIcon);
        searchBtn.setClassName("topBtn");
 
-       Image ringIcon = new Image();
+       Image ringIcon = new Image("images/bell.png", "Ring");
        Button ringBtn = new Button(ringIcon);
        ringBtn.setClassName("topBtn");
 
-       Image profileIcon = new Image();
+       Image profileIcon = new Image("images/person.png", "Profile");
        Button profileBtn = new Button(profileIcon);
        profileBtn.setClassName("topBtn");
 
-       topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
+       profileBtn.addClickListener(e -> {
+           UI.getCurrent().navigate("profile");
+       });
 
-       VerticalLayout middleContainer = new VerticalLayout();
-       middleContainer.setId("middle-container");
+       topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
 
         VerticalLayout choosePlanContainer = new VerticalLayout();
         choosePlanContainer.setId("choose-plan-container");
@@ -98,9 +105,9 @@ public class LogWorkoutView extends Div {
        titleField.setId("title-field");
        TextField bpmField = new TextField("avg bpm");
        bpmField.setId("bpm-field");
-       TextField timeSpendField = new TextField("time spend");
+       TextField timeSpendField = new TextField("time spend(01:50)");
        timeSpendField.setId("time-spend-field");
-       TextField dateField = new TextField("date(2025-04-09)");
+       TextField dateField = new TextField("date(2025-04-31)");
        dateField.setId("date-field");
        formContainer.add(titleField, bpmField, timeSpendField, dateField);
 
@@ -199,7 +206,28 @@ public class LogWorkoutView extends Div {
 
        });
        middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);
-       workoutDiv.add(leftContainer, topContainer, middleContainer);
+//       workoutDiv.add(leftContainer, topContainer, middleContainer);
+//       add(workoutDiv);
+
+       // Create a wrapper that holds left nav and the rest of the content
+       HorizontalLayout layoutWrapper = new HorizontalLayout();
+       layoutWrapper.setId("layout-wrapper-workouts");
+       layoutWrapper.setSizeFull();
+       layoutWrapper.setSpacing(false);
+       layoutWrapper.setPadding(false);
+
+       // Vertical layout to hold top bar and profile center content
+       VerticalLayout rightSection = new VerticalLayout();
+       rightSection.setId("right-section-workouts");
+       rightSection.setSpacing(false);
+       rightSection.setPadding(false);
+       rightSection.setSizeFull();
+
+       rightSection.add(topContainer, middleContainer);
+       layoutWrapper.add(leftContainer, rightSection);
+
+       // Add layoutWrapper to the profileDiv, and profileDiv to the view
+       workoutDiv.add(layoutWrapper);
        add(workoutDiv);
    }
 }
