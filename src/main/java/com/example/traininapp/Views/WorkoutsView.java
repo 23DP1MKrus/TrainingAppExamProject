@@ -45,6 +45,7 @@ public class WorkoutsView extends Div{
 
         if (user.getWorkouts().isEmpty()) {
             Paragraph noWorkouts = new Paragraph("Click 'log workout' to add your first workout.");
+            noWorkouts.setClassName("no-workouts");
             workoutsContainer.add(noWorkouts);
         } else {
             for (Workout workout : user.getWorkouts()) {

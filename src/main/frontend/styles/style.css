@@ -751,6 +751,11 @@ vaadin-checkbox::part(checkbox)::after {
  }
 vaadin-select{
     width: 20%;
+    --vaadin-field-default-color: white;
+}
+vaadin-select::slotted(*:hover) {
+    background-color: transparent;
+    color: white;
 }
 vaadin-select::part(input-field) {
     background: #161616;
@@ -783,6 +788,10 @@ vaadin-select-overlay::part(overlay){
     border: none;
     box-shadow: none;
 }
+vaadin-select-item{
+    color: white;
+}
+
 /*plans*/
 #plans-div{
     height: 100%;
@@ -847,7 +856,18 @@ vaadin-select-overlay::part(overlay){
     margin-top: 3%;
     margin-right: 3%;
 }
-
+.filterBy-title{
+    color: white;
+}
+.found-plans-title{
+    color: white;
+}
+.no-workouts{
+    color: white;
+}
+.no-plans{
+    color: white;
+}
 html, body, #outlet {
     background: transparent !important;
 }
