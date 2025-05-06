@@ -51,9 +51,6 @@ public class LogWorkoutView extends Div {
        this.planService = planService;
        setId("log-workout");
 
-       Div workoutDiv = new Div();
-       workoutDiv.setId("workout-div");
-
        LeftNavigation leftContainer = new LeftNavigation();
 
        HorizontalLayout topContainer = new HorizontalLayout();
@@ -62,6 +59,7 @@ public class LogWorkoutView extends Div {
 
        VerticalLayout middleContainer = new VerticalLayout();
        middleContainer.setId("middle-container");
+       middleContainer.add(topContainer);
 
 
        H1 title = new H1("LOG YOUR RECENT WORKOUT");
@@ -85,8 +83,10 @@ public class LogWorkoutView extends Div {
        profileBtn.addClickListener(e -> {
            UI.getCurrent().navigate("profile");
        });
-
-       topContainer.add(title, logWorkout,searchBtn, ringBtn, profileBtn);
+        HorizontalLayout topContainerRight = new HorizontalLayout();
+        topContainerRight.setId("top-container-right");
+       topContainerRight.add(logWorkout,searchBtn, ringBtn, profileBtn);
+       topContainer.add(title, topContainerRight);
 
         VerticalLayout choosePlanContainer = new VerticalLayout();
         choosePlanContainer.setId("choose-plan-container");
@@ -96,7 +96,8 @@ public class LogWorkoutView extends Div {
         selectPlan.setClassName("select-plan");
         selectPlan.setItems("Full Body","Push-Pull-Legs","Upper-Lower Split","Bro Split","StrongLifts 5x5","CrossFit","Calisthenics","Calisthenics","Endurance Training");
         selectPlan.setValue("Full Body");
-        middleContainer.add(choosePlan, selectPlan);
+        choosePlanContainer.add(choosePlan, selectPlan);
+        middleContainer.add(choosePlanContainer);
 
 
        Div formContainer = new Div();
@@ -112,7 +113,7 @@ public class LogWorkoutView extends Div {
        formContainer.add(titleField, bpmField, timeSpendField, dateField);
 
        VerticalLayout exerciseContainer = new VerticalLayout();
-       exerciseContainer.setId("exercise-container");
+       exerciseContainer.setId("exercise-container-logworkout");
        H1 chooseExercise = new H1("choose exercise");
        chooseExercise.setClassName("choose-exercise-title");
        exerciseContainer.add(chooseExercise);
@@ -210,11 +211,6 @@ public class LogWorkoutView extends Div {
 //       add(workoutDiv);
 
        // Create a wrapper that holds left nav and the rest of the content
-       HorizontalLayout layoutWrapper = new HorizontalLayout();
-       layoutWrapper.setId("layout-wrapper-workouts");
-       layoutWrapper.setSizeFull();
-       layoutWrapper.setSpacing(false);
-       layoutWrapper.setPadding(false);
 
        // Vertical layout to hold top bar and profile center content
        VerticalLayout rightSection = new VerticalLayout();
@@ -223,11 +219,9 @@ public class LogWorkoutView extends Div {
        rightSection.setPadding(false);
        rightSection.setSizeFull();
 
-       rightSection.add(topContainer, middleContainer);
-       layoutWrapper.add(leftContainer, rightSection);
+       rightSection.add(middleContainer);
 
        // Add layoutWrapper to the profileDiv, and profileDiv to the view
-       workoutDiv.add(layoutWrapper);
-       add(workoutDiv);
+       add(leftContainer, rightSection);
    }
 }
