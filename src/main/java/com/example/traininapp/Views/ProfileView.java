@@ -36,11 +36,12 @@ public class ProfileView extends Div {
         String userSurname = user.getSurname();
 
 
-        setId("profile-view");
-        Div profileDiv = new Div();
-        profileDiv.setId("profile-div");
+        setId("profile-div");
 
         LeftNavigation leftContainer = new LeftNavigation();
+
+        VerticalLayout rightContainer = new VerticalLayout();
+        rightContainer.setId("profile-right-container");
 
         TopBar topContainer = new TopBar("your profile");
 
@@ -87,29 +88,24 @@ public class ProfileView extends Div {
 
         secondContainer.add(secondContainerTitle,secondContainerWorkouts);
         centerContainer.add(firstContainerInCenter,secondContainer);
-//        profileDiv.add(leftContainer,topContainer,centerContainer);
-//        add(profileDiv);
+        rightContainer.add(topContainer,centerContainer);
 
-        // Create a wrapper that holds left nav and the rest of the content
-        HorizontalLayout layoutWrapper = new HorizontalLayout();
-        layoutWrapper.setId("layout-wrapper");
-        layoutWrapper.setSizeFull();
-        layoutWrapper.setSpacing(false);
-        layoutWrapper.setPadding(false);
+//        HorizontalLayout layoutWrapper = new HorizontalLayout();
+//        layoutWrapper.setId("layout-wrapper");
+//        layoutWrapper.setSizeFull();
+//        layoutWrapper.setSpacing(false);
+//        layoutWrapper.setPadding(false);
+//
+//        VerticalLayout rightSection = new VerticalLayout();
+//        rightSection.setId("right-section");
+//        rightSection.setSpacing(false);
+//        rightSection.setPadding(false);
+//        rightSection.setSizeFull();
+//
+//        rightSection.add(topContainer, centerContainer);
+//        layoutWrapper.add(leftContainer, rightSection);
 
-        // Vertical layout to hold top bar and profile center content
-        VerticalLayout rightSection = new VerticalLayout();
-        rightSection.setId("right-section");
-        rightSection.setSpacing(false);
-        rightSection.setPadding(false);
-        rightSection.setSizeFull();
-
-        rightSection.add(topContainer, centerContainer);
-        layoutWrapper.add(leftContainer, rightSection);
-
-        // Add layoutWrapper to the profileDiv, and profileDiv to the view
-        profileDiv.add(layoutWrapper);
-        add(profileDiv);
+        add(leftContainer, rightContainer);
 
 
 

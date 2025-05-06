@@ -24,17 +24,17 @@ public class PlansView extends Div {
         this.planService = planService;
         this.plansContainer = new VerticalLayout();
 
-        setId("plans-view");
-
-        Div plansDiv = new Div();
-        plansDiv.setId("plans-div");
+        setId("plans-div");
 
         LeftNavigation leftContainer = new LeftNavigation();
+
+        VerticalLayout rightContainer = new VerticalLayout();
+        rightContainer.setId("plans-right-container");
 
         TopBar topContainer = new TopBar("Log Workout");
 
         VerticalLayout middleContainer = new VerticalLayout();
-        middleContainer.setId("middle-container");
+        middleContainer.setId("middle-container-plans");
 
 
         VerticalLayout filtersContainer = new VerticalLayout();
@@ -44,11 +44,13 @@ public class PlansView extends Div {
         filterTitle.setClassName("filterBy-title");
 
         Select<String> difficultyFilter = new Select<>();
+        difficultyFilter.setClassName("difficulty-filter");
         difficultyFilter.setItems("Beginner", "Intermediate", "Advanced", "All");
         difficultyFilter.setValue("All");
         difficultyFilter.setPlaceholder("Difficulty");
 
         Select<String> daysFilter = new Select<>();
+        daysFilter.setClassName("days-filter");
         daysFilter.setItems("3", "4", "5", "All");
         daysFilter.setValue("All");
         daysFilter.setPlaceholder("Days count");
@@ -69,35 +71,18 @@ public class PlansView extends Div {
 
         plansContainer.setId("plans-container");
 
-
         showPlans(planService.getAllPlans());
 
         middleContainer.add(filtersContainer, plansContainer);
 
-        plansDiv.add(leftContainer, topContainer, middleContainer);
+        rightContainer.add(topContainer,middleContainer);
 
-        add(plansDiv);
+        add(leftContainer, rightContainer);
 
-        plansContainer.setId("plans-container");
 
-        showPlans(planService.getAllPlans());
-
-        middleContainer.add(filtersContainer, plansContainer);
-
-        plansDiv.add(leftContainer, topContainer, middleContainer);
-
-        add(plansDiv);
 
     }
 
-
-    private HorizontalLayout createNavLink(String text, String route) {
-        Anchor anchor = new Anchor(route, text);
-        anchor.setClassName("nav-link");
-        HorizontalLayout navLayout = new HorizontalLayout();
-        navLayout.add(anchor);
-        return navLayout;
-    }
 
     private void applyFilters(String difficultyFilter, String daysFilter) {
 
@@ -136,6 +121,8 @@ public class PlansView extends Div {
         }
 
         for (Plans plan : plans) {
+            HorizontalLayout filterInPlan = new HorizontalLayout();
+            filterInPlan.setId("filter-in-plan");
             HorizontalLayout planDiv = new HorizontalLayout();
             planDiv.setClassName("plan-div");
 
@@ -148,7 +135,9 @@ public class PlansView extends Div {
             Paragraph days = new Paragraph(plan.getDaysCount() + " days");
             days.setClassName("days");
 
-            planDiv.add(planName, difficulty, days);
+            filterInPlan.add(difficulty, days);
+
+            planDiv.add(planName, filterInPlan);
             plansContainer.add(planDiv);
         }
     }
