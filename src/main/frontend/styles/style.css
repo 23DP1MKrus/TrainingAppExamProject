@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+
 .register-view{
     font-family: "Raleway", sans-serif;
     display: flex;
@@ -846,8 +848,9 @@ vaadin-select-overlay::part(overlay){
     margin-right: 3%;
 }
 
-
-
+html, body, #outlet {
+    background: transparent !important;
+}
 
 
 
