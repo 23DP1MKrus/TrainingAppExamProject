@@ -6,7 +6,7 @@ This is a **Training App** built with **Spring Boot**, **Vaadin Flow**, and **Po
 
 ## 🚀 Tools used in this project
 
-- **Backend**: Java 17+, Spring Boot
+- **Backend**: Java, Spring Boot
 - **Frontend**: Vaadin Flow (Java-based UI)
 - **Database**: PostgreSQL
 - **Build Tool**: Maven
