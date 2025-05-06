@@ -14,6 +14,12 @@ This is a **Training App** built with **Spring Boot**, **Vaadin Flow**, and **Po
 
 ---
 
+## Testing
+
+- **Manual testing table**: https://docs.google.com/spreadsheets/d/1-DlpJnxqaHs5e82rx7Lx3Yeqt6toqJCLuTQvDYuXKXY/edit?usp=sharing
+
+---
+
 ## 📦 Features
 
 ### User Management
