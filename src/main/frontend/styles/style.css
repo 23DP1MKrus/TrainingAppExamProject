@@ -577,3 +577,65 @@ vaadin-text-field > input:placeholder-shown{
     width: 100%;
 
 }
+/*plans*/
+#plans-div{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    align-items: start;
+}
+#middle-container-plans{
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 95% !important;
+    height: 80% !important;
+    margin-right: 5%;
+    margin-top: 3%;
+}
+.plan-div{
+    align-items: center;
+    height: 10%;
+    width: 85%;
+    border-radius: 2vh;
+    background-color: #161616;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    color: white;
+    padding: 0.5vw;
+}
+.plan-title{
+    color: white;
+    font-size: 1.5vw;
+}
+.difficulty{
+    background-color: rgba(151, 88, 228, 0.51);
+    height: 50%;
+    width: 30%;
+    border-radius: 1vh;
+    border: 2px solid #A667F3;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+.days{
+    background-color: rgba(151, 88, 228, 0.51);
+    height: 50%;
+    width: 20%;
+    border-radius: 1vh;
+    border: 2px solid #A667F3;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+#filter-in-plan{
+    display: flex;
+    justify-content: end;
+    margin-right: 5%;
+    width: 45%;
+}
+
+
