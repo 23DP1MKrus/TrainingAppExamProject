@@ -747,7 +747,7 @@ vaadin-checkbox::part(checkbox)::after {
     background-color: #A667F3;
     border-radius: 0.25vw;
  }
-vaadin-select.select-plan{
+vaadin-select{
     width: 20%;
 }
 vaadin-select::part(input-field) {
@@ -841,7 +841,10 @@ vaadin-select-overlay::part(overlay){
     margin-right: 5%;
     width: 45%;
 }
-
+#plans-right-container{
+    margin-top: 3%;
+    margin-right: 3%;
+}
 
 
 
