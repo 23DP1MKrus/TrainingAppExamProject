@@ -45,20 +45,22 @@ public class LoginView extends VerticalLayout {
 
         Text error = new Text("");
         Button loginButton = new Button("Log in");
-        Anchor anchor = new Anchor("register", "Don't have an account yet?");
+        Anchor anchor = new Anchor("/", "Don't have an account yet?");
         Image logo = new Image("images/logo.png", "Logo");
         loginButton.setClassName("login-button");
         loginButton.addClickListener(e -> {
             if(Objects.equals(email.getValue(),"") || Objects.equals(password.getValue(),"")){
                 ErrorNotification errorNotification = new ErrorNotification("Empty fields are not allowed!");
             } else {
-                if (userService.canLogin(email.getValue(), password.getValue())) {
+                try{
+                    userService.canLogin(email.getValue(), password.getValue());
                     VaadinSession session = VaadinSession.getCurrent();
                     session.setAttribute("email", email.getValue());
                     UI.getCurrent().navigate("main");
-                } else {
-                    error.setText("login-error");
+                }catch (Exception ex){
+                    ErrorNotification errorNotification = new ErrorNotification(ex.getMessage());
                 }
+
             }
         });
 
