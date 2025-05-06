@@ -64,7 +64,7 @@ public class LogWorkoutView extends Div {
 
 
        H1 title = new H1("LOG YOUR RECENT WORKOUT");
-       title.setClassName("title");
+       title.setClassName("log-workout-title");
        Button logWorkout = new Button("log workout");
 
        logWorkout.setClassName("log-workout-button");

@@ -99,7 +99,7 @@ public class MainView extends Div {
         challenges.setId("challenges");
 
         List<Challenge> randomChallenges = new ArrayList<Challenge>();
-        while (randomChallenges.size() < 5) {
+        while (randomChallenges.size() < 4) {
             Challenge randomChallenge = challengeService.getRandomChallenge().orElseThrow(() -> new RuntimeException("random challenge not found"));
             if (!randomChallenges.contains(randomChallenge)) {
                 randomChallenges.add(randomChallenge);

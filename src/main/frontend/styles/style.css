@@ -140,7 +140,7 @@ vaadin-text-field > input:placeholder-shown{
     color: white;
     text-decoration: none;
     text-align: left;
-    font-size: 0.6vw;
+    font-size: 1.2vw;
 }
 #center-container {
     margin-top: 3%;
@@ -162,7 +162,7 @@ vaadin-text-field > input:placeholder-shown{
     color: white;
 }
 #top-bar h1{
-    font-size: 2vw;
+    font-size: 3vw;
     color: white;
     margin-left: 2%;
     font-weight: bolder;
@@ -263,6 +263,7 @@ vaadin-text-field > input:placeholder-shown{
     color: white;
     border-radius: 1vw;
     width: 90% !important;
+    padding: 5%
 }
 #challenge-container h1{
     color: white;
@@ -273,7 +274,8 @@ vaadin-text-field > input:placeholder-shown{
     align-items: start;
     justify-content: center;
     flex-direction: column;
-    font-size: 0.6vw;
+    font-size: 0.7vw;
+    padding: 0;
 }
 #challenge-content {
     width: 80% !important;
@@ -312,7 +314,7 @@ vaadin-text-field > input:placeholder-shown{
 }
 #third-container-title{
     color: white;
-    font-size: 1vw;
+    font-size: 1.4vw;
 }
 #divider{
     width: 100% !important;
@@ -326,11 +328,11 @@ vaadin-text-field > input:placeholder-shown{
 }
 #last-workout-title{
     color: white;
-    font-size: 0.7vw;
+    font-size: 1vw;
 }
 #last-workout-date{
     color: white;
-    font-size: 0.7vw;
+    font-size: 1vw;
 }
 
 /*workouts*/
@@ -380,9 +382,14 @@ vaadin-text-field > input:placeholder-shown{
 }
 .workout-date{
     margin-left: 5%;
+    width: 15%;
 }
 .workout-time-spent-holder{
-    margin-left: 40%;
+    margin-left: 19%;
+    width: 10%;
+}
+.workout-burnt-cal-holder{
+    width: 10%;
 }
 
 /*log workout*/
@@ -460,7 +467,7 @@ vaadin-text-field > input:placeholder-shown{
 .workout-info{
     align-items: center;
     height: 10%;
-    width: 85%;
+    width: 100%;
     border-radius: 2vh;
     border: #9758E4 1px solid;
     display: flex;
@@ -511,7 +518,8 @@ vaadin-text-field > input:placeholder-shown{
     border-radius: 1vw;
 }
 #exercise-container p{
-    width: 50%;
+    width: 70%;
+    font-size: 0.8vw;
 }
 .exercise-image{
     width: 40%;
@@ -566,8 +574,12 @@ vaadin-text-field > input:placeholder-shown{
     margin-top: 3%;
 }
 .choose-plan-title{
-    color: #161616;
+    color: white;
 }
+.choose-exercise-title{
+    color: white;
+}
+
 #exercise-container-logworkout{
     display: flex;
     flex-direction: column;
@@ -615,8 +627,11 @@ vaadin-text-field > input:placeholder-shown{
 }
 .form-title{
     font-size: 1.5vw;
-    color: #161616;
+    color: white;
     margin: 0;
+}
+.log-workout-title {
+    color: white;
 }
 
 vaadin-text-field.title-field::part(input-field) {
