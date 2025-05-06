@@ -380,7 +380,7 @@ vaadin-text-field > input:placeholder-shown{
     margin-left: 5%;
 }
 .workout-time-spent-holder{
-    margin-left: 15%;
+    margin-left: 40%;
 }
 
 /*log workout*/
@@ -488,7 +488,18 @@ vaadin-text-field > input:placeholder-shown{
     margin-right: 5%;
     margin-top: 2%;
 }
-#middle-container::-webkit-scrollbar {
+#middle-container-exercises{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 95% !important;
+    height: 80% !important;
+    margin-right: 5%;
+    margin-top: 3%;
+    overflow-y: scroll;
+}
+#middle-container-exercises::-webkit-scrollbar {
     display: none;
 }
 #exercise-container{
@@ -547,7 +558,7 @@ vaadin-text-field > input:placeholder-shown{
     display: flex;
     flex-direction: column;
 }
-#middle-container{
+#middle-container-log-workout{
     display: flex;
     align-items: start;
     justify-content: space-between;
@@ -569,11 +580,213 @@ vaadin-text-field > input:placeholder-shown{
     overflow-y: scroll;
     height: 20vh !important;
 }
+#exercise-container-logworkout::-webkit-scrollbar {
+    display: none;
+}
 .exercise-div{
     background-color: #161616;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: start;
     width: 100%;
-
+    padding: 0.7vw;
+    border-radius: 0.7vw;
 }
+#form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: 40% !important;
+    height: 30% !important;
+}
+#form-container-upper{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+#form-container-lower{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+}
+.form-title{
+    font-size: 1.5vw;
+    color: #161616;
+    margin: 0;
+}
+
+vaadin-text-field.title-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: #161616;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.title-field{
+    width: 40%;
+    height: 100%;
+}
+vaadin-text-field.title-field > input:placeholder-shown{
+    color: rgba(255, 255, 255, 0.19);
+}
+
+vaadin-text-field.bpm-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: #161616;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.bpm-field{
+    width: 30%;
+    height: 100%;
+}
+vaadin-text-field.bpm-field > input:placeholder-shown{
+    color: rgba(255, 255, 255, 0.19);
+}
+
+
+vaadin-text-field.time-spend-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: #161616;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.time-spend-field{
+    width: 30%;
+    height: 100%;
+}
+vaadin-text-field.time-spend-field > input:placeholder-shown{
+    color: rgba(255, 255, 255, 0.19);
+}
+
+vaadin-text-field.date-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: #161616;
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.date-field{
+    width: 40%;
+    height: 100%;
+}
+vaadin-text-field.date-field > input:placeholder-shown{
+    color: rgba(255, 255, 255, 0.19);
+}
+
+.exercise-title{
+    color: white;
+    width: 70% !important;
+    margin-left: 2%;
+    font-size: 1vw;
+}
+
+.weight-field{
+    margin-left: 60%;
+    width: 6% !important;
+    height: 100% !important;
+}
+.reps-field{
+    width: 6% !important;
+    height: 100% !important;
+}
+.sets-field{
+    width: 6% !important;
+    height: 100% !important;
+}
+
+vaadin-text-field.weight-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: rgba(151, 88, 228, 0.29);
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.weight-field > input:placeholder-shown{
+    color: #9758E4;
+}
+
+vaadin-text-field.reps-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: rgba(151, 88, 228, 0.29);
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.reps-field > input:placeholder-shown{
+    color: #9758E4;
+}
+
+vaadin-text-field.sets-field::part(input-field) {
+    border-radius: 0.5vw;
+    background-color: rgba(151, 88, 228, 0.29);
+    width: 100%;
+    height: 100%;
+    border: none;
+    color: white;
+}
+vaadin-text-field.sets-field > input:placeholder-shown{
+    color: #9758E4;
+}
+vaadin-checkbox::part(checkbox) {
+    border: 0.05vw solid #A667F3;
+    border-radius: 0.25vw;
+    background-color: rgba(151, 88, 228, 0.29);
+}
+vaadin-checkbox::part(checkbox)::after {
+    background-color: #A667F3;
+    border-radius: 0.25vw;
+ }
+vaadin-select.select-plan{
+    width: 20%;
+}
+vaadin-select::part(input-field) {
+    background: #161616;
+    border-radius: 0.5vw;
+    color: white;
+}
+vaadin-select::part(toggle-button) {
+    color: white;
+}
+vaadin-select::part(label) {
+    color: white;
+    font-weight: bold;
+}
+vaadin-select::part(value) {
+    color: white;
+    font-style: italic;
+}
+vaadin-select-list-box {
+    background-color: #161616;
+    border-radius: 0.6vw;
+    color: white;
+}
+vaadin-select-overlay::part(content){
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+vaadin-select-overlay::part(overlay){
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
+
+
+

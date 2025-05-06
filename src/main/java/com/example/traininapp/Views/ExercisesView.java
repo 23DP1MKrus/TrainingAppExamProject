@@ -28,7 +28,7 @@ public class ExercisesView extends Div {
         TopBar topContainer = new TopBar("Exercises");
 
         VerticalLayout middleContainer = new VerticalLayout();
-        middleContainer.setId("middle-container");
+        middleContainer.setId("middle-container-exercises");
         List<Exercise> exerciseList = exerciseService.getAllExercises();
         for (Exercise exercise : exerciseList) {
             HorizontalLayout exerciseContainer = new HorizontalLayout();

@@ -14,10 +14,12 @@ import com.example.traininapp.WorkoutPack.WorkoutService;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.charts.model.Title;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
 import com.vaadin.flow.component.html.Image;
+import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -58,7 +60,7 @@ public class LogWorkoutView extends Div {
 
 
        VerticalLayout middleContainer = new VerticalLayout();
-       middleContainer.setId("middle-container");
+       middleContainer.setId("middle-container-log-workout");
        middleContainer.add(topContainer);
 
 
@@ -100,23 +102,43 @@ public class LogWorkoutView extends Div {
         middleContainer.add(choosePlanContainer);
 
 
-       Div formContainer = new Div();
+       VerticalLayout formContainer = new VerticalLayout();
        formContainer.setId("form-container");
-       TextField titleField = new TextField("title");
-       titleField.setId("title-field");
-       TextField bpmField = new TextField("avg bpm");
-       bpmField.setId("bpm-field");
-       TextField timeSpendField = new TextField("time spend(01:50)");
-       timeSpendField.setId("time-spend-field");
-       TextField dateField = new TextField("date(2025-04-31)");
-       dateField.setId("date-field");
-       formContainer.add(titleField, bpmField, timeSpendField, dateField);
 
-       VerticalLayout exerciseContainer = new VerticalLayout();
-       exerciseContainer.setId("exercise-container-logworkout");
+       HorizontalLayout formContainerUpper = new HorizontalLayout();
+       formContainerUpper.setId("form-container-upper");
+       HorizontalLayout formContainerLower = new HorizontalLayout();
+       formContainerLower.setId("form-container-lower");
+
+       H1 formTitle = new H1("describe workout");
+       formTitle.setClassName("form-title");
+
+       TextField titleField = new TextField();
+       titleField.setClassName("title-field");
+       titleField.setPlaceholder("title");
+       TextField bpmField = new TextField();
+       bpmField.setClassName("bpm-field");
+       bpmField.setPlaceholder("avg bpm");
+       formContainerUpper.add(titleField, bpmField);
+
+       TextField timeSpendField = new TextField();
+       timeSpendField.setClassName("time-spend-field");
+       timeSpendField.setPlaceholder("time spend(01:50)");
+       TextField dateField = new TextField();
+       dateField.setClassName("date-field");
+       dateField.setPlaceholder("date(2025-04-31)");
+       formContainerLower.add(timeSpendField, dateField);
+
+       formContainer.add(formTitle,formContainerUpper,formContainerLower);
+
        H1 chooseExercise = new H1("choose exercise");
        chooseExercise.setClassName("choose-exercise-title");
-       exerciseContainer.add(chooseExercise);
+       VerticalLayout exerciseContainerWrapper = new VerticalLayout();
+       exerciseContainerWrapper.setId("exercise-container-wrapper");
+       exerciseContainerWrapper.add(chooseExercise);
+       VerticalLayout exerciseContainer = new VerticalLayout();
+       exerciseContainer.setId("exercise-container-logworkout");
+       exerciseContainerWrapper.add(exerciseContainer);
        List<Exercise> exerciseList = exerciseService.getAllExercises();
        List<Checkbox> checkboxList = new ArrayList<>();
        for (Exercise exercise : exerciseList) {
@@ -124,11 +146,14 @@ public class LogWorkoutView extends Div {
            exerciseDiv.setClassName("exercise-div");
            H1 exerciseTitle = new H1(exercise.getName());
            exerciseTitle.setClassName("exercise-title");
-           TextField weight = new TextField("weight");
+           TextField weight = new TextField();
+           weight.setPlaceholder("weight");
            weight.setClassName("weight-field");
-           TextField reps = new TextField("reps");
+           TextField reps = new TextField();
+           reps.setPlaceholder("reps");
            reps.setClassName("reps-field");
-           TextField sets = new TextField("sets");
+           TextField sets = new TextField();
+           sets.setPlaceholder("sets");
            sets.setClassName("sets-field");
            Checkbox addExercise = new Checkbox();
            addExercise.setId(String.valueOf(exercise.getId()));
@@ -206,7 +231,7 @@ public class LogWorkoutView extends Div {
 
 
        });
-       middleContainer.add(choosePlanContainer, formContainer, exerciseContainer);
+       middleContainer.add(choosePlanContainer, formContainer, exerciseContainerWrapper);
 //       workoutDiv.add(leftContainer, topContainer, middleContainer);
 //       add(workoutDiv);
 
