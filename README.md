@@ -9,8 +9,9 @@ This is a **Training App** built with **Spring Boot**, **Vaadin Flow**, and **Po
 - **Backend**: Java, Spring Boot
 - **Frontend**: Vaadin Flow (Java-based UI)
 - **Database**: PostgreSQL
-- **Build Tool**: Maven
+- **Build Tools**: Maven
 - **Styling**: Custom CSS
+- **Render Process**: Electron
 
 ---
 
@@ -38,12 +39,14 @@ This is a **Training App** built with **Spring Boot**, **Vaadin Flow**, and **Po
 
 ## 📁 User guide
 
+### System requirements
+1. Java installed on your device
+2. Maven installed on your device
+
 ### Getting Started
-1. Dowload this zip-archieve (link below) and look for the myapp file.
-2. clone the repository and run TrainingAppApplication file
+1. Dowload this zip-archieve (link below).
 3. make sure you have java and maven dowloaded on your device
-4. make sure the localhost is active
-5. open myapp
+4. unzip the zip-arcieve and open myapp
 
 - https://github.com/23DP1MKrus/TrainingAppExamProject/releases/download/v1.0/myapp-win32-x64.1.zip
 
