@@ -659,7 +659,7 @@ vaadin-text-field.bpm-field::part(input-field) {
     color: white;
 }
 vaadin-text-field.bpm-field{
-    width: 30%;
+    width: 60%;
     height: 100%;
 }
 vaadin-text-field.bpm-field > input:placeholder-shown{
@@ -676,7 +676,7 @@ vaadin-text-field.time-spend-field::part(input-field) {
     color: white;
 }
 vaadin-text-field.time-spend-field{
-    width: 30%;
+    width: 40%;
     height: 100%;
 }
 vaadin-text-field.time-spend-field > input:placeholder-shown{
@@ -703,20 +703,20 @@ vaadin-text-field.date-field > input:placeholder-shown{
     color: white;
     width: 70% !important;
     margin-left: 2%;
-    font-size: 1vw;
+    font-size: 1.2vw;
 }
 
 .weight-field{
-    margin-left: 60%;
-    width: 6% !important;
+    margin-left: 50%;
+    width: 10% !important;
     height: 100% !important;
 }
 .reps-field{
-    width: 6% !important;
+    width: 10% !important;
     height: 100% !important;
 }
 .sets-field{
-    width: 6% !important;
+    width: 10% !important;
     height: 100% !important;
 }
 
