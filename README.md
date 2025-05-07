@@ -51,8 +51,7 @@ This is a **Training App** built with **Spring Boot**, **Vaadin Flow**, and **Po
 - https://github.com/23DP1MKrus/TrainingAppExamProject/releases/download/v1.0/myapp-win32-x64.zip
 
 ###  Register
-1. On the login screen, click **Register**.
-2. Fill in your name, email, password.
+1. Fill in your name, email, password on the register page.
 3. Submit the form to create your account.
 
 ###  Login
