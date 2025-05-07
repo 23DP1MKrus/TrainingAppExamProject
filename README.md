@@ -39,7 +39,13 @@ This is a **Training App** built with **Spring Boot**, **Vaadin Flow**, and **Po
 ## 📁 User guide
 
 ### Getting Started
-1. Dowload the app using the link bellow
+1. Dowload this zip-archieve (link below) and look for the myapp file.
+2. clone the repository and run TrainingAppApplication file
+3. make sure you have java and maven dowloaded on your device
+4. make sure the localhost is active
+5. open myapp
+
+- https://github.com/23DP1MKrus/TrainingAppExamProject/releases/download/v1.0/myapp-win32-x64.1.zip
 
 ###  Register
 1. On the login screen, click **Register**.
